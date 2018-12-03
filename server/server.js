@@ -17,10 +17,13 @@ mongoose
   .then(() => console.log("MongoDB connected"))
   .catch(err => console.log(err));
 
+// Passport middleware
 app.use(passport.initialize());
 
+// Passport config
 require("./config/passport")(passport);
 
+// Serve static assets folder if in production
 if (process.env.NODE_ENV === "production") {
   // Set static folder
   app.use(express.static("../client/build"));
