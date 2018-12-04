@@ -8,17 +8,21 @@ const UserSchema = new Schema({
     required: true,
     unique: true
   },
-  usertype: {
+  userType: {
     type: String,
     required: true
   },
-  firstname: {
+  firstName: {
     type: String,
     required: true
   },
-  lastname: {
+  lastName: {
     type: String,
     required: true
+  },
+  middleName: {
+    type: String,
+    required: false
   },
   email: {
     type: String,
