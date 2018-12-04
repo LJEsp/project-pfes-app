@@ -25,7 +25,7 @@ const locationObject = isRequired => {
   };
 };
 
-const requiredStrings = {
+const requiredString = {
   type: String,
   required: true
 };
@@ -77,9 +77,9 @@ const operationObject = {
 };
 
 const DomesticLogSchema = new Schema({
-  shipperConsignee: requiredStrings,
-  associate: requiredStrings,
-  modeOfTransport: requiredStrings,
+  shipperConsignee: requiredString,
+  associate: requiredString,
+  modeOfTransport: requiredString,
   commodity: {
     type: {
       type: String
