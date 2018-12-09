@@ -11,7 +11,10 @@ const styles = theme => ({
     padding: theme.spacing.unit * 3,
     paddingTop: theme.spacing.unit,
     display: "flex",
-    flexFlow: "column"
+    flexFlow: "column",
+    [theme.breakpoints.down("sm")]: {
+      padding: 0
+    }
   },
   passwordField: {
     marginBottom: theme.spacing.unit * 2

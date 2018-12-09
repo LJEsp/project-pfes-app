@@ -1,37 +1,39 @@
 import React, { Component, Fragment } from "react";
-import {
-  Grid,
-  Paper,
-  Typography,
-  MenuList,
-  MenuItem,
-  AppBar,
-  Toolbar,
-  Drawer,
-  Card,
-  CardContent,
-  CardActions,
-  TextField,
-  Divider
-} from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
+import compose from "recompose/compose";
 
 import LoginForm from "./components/LoginForm/LoginForm";
 
 import pfesLogo from "./pfes-logo.png";
+import bg from "./bg.jpg";
 
 const styles = theme => ({
   root: {
+    height: "100vh",
     margin: "0 auto",
-    height: "90vh",
-    width: "80%"
+    position: "relative",
+    // backgroundImage: `linear-gradient(to top, ${
+    //   theme.palette.primary.main
+    // }, white)`
+    // backgroundImage: `url(${bg})`,
+    // backgroundRepeat: "no-repeat",
+    // backgroundSize: "cover",
+    // backgroundPosition: "bottom"
+  },
+  logo: {
+    width: "300px",
+    height: "auto",
+    marginBottom: theme.spacing.unit * 3,
+    [theme.breakpoints.down("xs")]: {
+      width: "150px"
+    }
   },
   loginForm: {
-    width: "80%"
-  },
-  logoImg: {
-    width: "auto",
-    height: "auto"
+    width: "500px",
+    [theme.breakpoints.down("xs")]: {
+      width: "80%"
+    }
   }
 });
 
@@ -41,16 +43,19 @@ class Login extends Component {
 
     return (
       <Fragment>
-        <Grid container className={classes.root}>
-          <Grid item xs={6} container justify="center" alignItems="center">
-            <img className={classes.logoImg} src={pfesLogo} alt="PFES logo" />
-          </Grid>
+        <Grid
+          container
+          className={classes.root}
+          direction="column"
+          wrap="nowrap"
+          justify="center"
+          alignItems="center"
+        >
+          <img className={classes.logo} src={pfesLogo} alt="PFES logo" />
 
-          <Grid item xs={6} container justify="center" alignItems="center">
-            <div className={classes.loginForm}>
-              <LoginForm />
-            </div>
-          </Grid>
+          <div className={classes.loginForm}>
+            <LoginForm />
+          </div>
         </Grid>
       </Fragment>
     );
