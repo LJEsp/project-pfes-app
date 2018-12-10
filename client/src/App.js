@@ -4,7 +4,7 @@ import { withStyles } from "@material-ui/core/styles";
 import withRoot from "./withRoot";
 import "typeface-roboto";
 
-import { Login } from "./pages";
+import { Login, Dashboard } from "./pages";
 
 const styles = theme => ({});
 
@@ -12,7 +12,9 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-        <Login />
+        {/* <Login /> */}
+
+        <Dashboard />
       </Fragment>
     );
   }
