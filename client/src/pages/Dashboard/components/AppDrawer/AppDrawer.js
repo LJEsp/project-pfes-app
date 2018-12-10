@@ -1,116 +1,128 @@
-// import React, { Component } from "react";
-// import { Drawer, Hidden, Divider, Typography } from "@material-ui/core";
-// import { withStyles } from "@material-ui/core/styles";
+import React, { Fragment } from "react";
+import {
+  Drawer,
+  Hidden,
+  Grid,
+  Typography,
+  Divider,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemIcon,
+  Chip,
+  Avatar
+} from "@material-ui/core";
 
-// const styles = theme => ({
-//   root: {
-//     width: 200,
-//     flexShrink: 0
-//   },
-//   drawer: {
-//     width: 200
-//   },
-//   toolbar: theme.mixins.toolbar
-// });
+import WorkIcon from "@material-ui/icons/Work";
+import GroupIcon from "@material-ui/icons/Group";
+import BuildIcon from "@material-ui/icons/Build";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
-// class AppDrawer extends Component {
-//   render() {
-//     const { classes } = this.props;
-
-//     return (
-//       <nav className={classes.root}>
-//         {/* <Hidden smUp> */}
-//         <Drawer
-//           variant="permanent"
-//           open="true"
-//           // onClose={this.handleDrawerToggle}
-//           ModalProps={{ keepMounted: true }}
-//           className={classes.drawer}
-//         >
-//           <div>
-//             <div className={classes.toolbar} />
-//             <Divider />
-
-//             <Typography>Test</Typography>
-//           </div>
-//         </Drawer>
-//         {/* </Hidden> */}
-//       </nav>
-//     );
-//   }
-// }
-
-// export default withStyles(styles)(AppDrawer);
-
-import React from "react";
-import PropTypes from "prop-types";
-import AppBar from "@material-ui/core/AppBar";
-import Divider from "@material-ui/core/Divider";
-import Drawer from "@material-ui/core/Drawer";
-import Hidden from "@material-ui/core/Hidden";
-import IconButton from "@material-ui/core/IconButton";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import MailIcon from "@material-ui/icons/Mail";
-import MenuIcon from "@material-ui/icons/Menu";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
+import pfesLogo from "../../../../assets/img/pfes-logo.png";
 
-const drawerWidth = 240;
+const drawerWidth = 250;
 
 const styles = theme => ({
-  root: {
-    display: "flex"
-  },
-  drawer: {
-    [theme.breakpoints.up("sm")]: {
-      width: drawerWidth,
-      flexShrink: 0
-    }
-  },
-  appBar: {
-    marginLeft: drawerWidth,
-    [theme.breakpoints.up("sm")]: {
-      width: `calc(100% - ${drawerWidth}px)`
-    }
-  },
-  menuButton: {
-    marginRight: 20,
-    [theme.breakpoints.up("sm")]: {
-      display: "none"
-    }
-  },
-  toolbar: theme.mixins.toolbar,
   drawerPaper: {
     width: drawerWidth
   },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing.unit * 3
+  drawerContents: {
+    paddingTop: theme.spacing.unit
+  },
+  logo: {
+    width: "50%",
+    height: "auto",
+    alignSelf: "center",
+    marginBottom: theme.spacing.unit
+  },
+  infoContainer: {
+    display: "flex",
+    flexFlow: "column",
+    alignItems: "center",
+    paddingLeft: theme.spacing.unit,
+    paddingRight: theme.spacing.unit,
+    paddingBottom: theme.spacing.unit * 2
   }
 });
 
 class AppDrawer extends React.Component {
-  // state = {
-  //   mobileOpen: false
-  // };
-
-  // handleDrawerToggle = () => {
-  //   this.setState(state => ({ mobileOpen: !state.mobileOpen }));
-  // };
-
   render() {
     const { classes, theme, isMobileOpen, drawerToggle } = this.props;
 
-    const drawerContent = <div>Test</div>;
+    const drawerContents = (
+      <Grid
+        container
+        alignItems="stretch"
+        justify="flex-start"
+        direction="column"
+        className={classes.drawerContents}
+      >
+        <img src={pfesLogo} alt="PFES logo" className={classes.logo} />
+
+        <div className={classes.infoContainer}>
+          <Typography variant="h5" align="center" gutterBottom>
+            Tilda Swinton
+          </Typography>
+
+          <Chip
+            icon={<BuildIcon fontSize="small" />}
+            label="Administrator"
+            color="primary"
+          />
+        </div>
+
+        <Divider />
+
+        <List component="nav">
+          <ListItem button>
+            <ListItemIcon>
+              <WorkIcon />
+            </ListItemIcon>
+
+            <ListItemText primary="My Job Orders" />
+          </ListItem>
+
+          <ListItem button>
+            <ListItemIcon>
+              <GroupIcon />
+            </ListItemIcon>
+
+            <ListItemText primary="All Job Orders" />
+          </ListItem>
+        </List>
+
+        <Divider />
+
+        <List component="nav">
+          <ListItem button>
+            <ListItemIcon>
+              <AccountCircleIcon />
+            </ListItemIcon>
+
+            <ListItemText primary="Manage Users" />
+          </ListItem>
+        </List>
+
+        <Divider />
+
+        <List component="nav">
+          <ListItem button>
+            <ListItemIcon>
+              <ExitToAppIcon />
+            </ListItemIcon>
+
+            <ListItemText primary="Log Out" />
+          </ListItem>
+        </List>
+      </Grid>
+    );
 
     return (
-      <nav className={classes.drawer}>
-        <Hidden smUp>
+      <Fragment>
+        {/* Drawer for mobile */}
+        <Hidden mdUp>
           <Drawer
             container={this.props.container}
             variant="temporary"
@@ -119,11 +131,12 @@ class AppDrawer extends React.Component {
             ModalProps={{ keepMounted: true }}
             onClose={drawerToggle}
           >
-            {drawerContent}
+            {drawerContents}
           </Drawer>
         </Hidden>
 
-        <Hidden xsDown implementation="css">
+        {/* Drawer for desktop */}
+        <Hidden smDown implementation="css">
           <Drawer
             classes={{
               paper: classes.drawerPaper
@@ -131,10 +144,10 @@ class AppDrawer extends React.Component {
             variant="permanent"
             open
           >
-            {drawerContent}
+            {drawerContents}
           </Drawer>
         </Hidden>
-      </nav>
+      </Fragment>
     );
   }
 }

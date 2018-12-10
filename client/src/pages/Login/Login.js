@@ -5,7 +5,7 @@ import compose from "recompose/compose";
 
 import LoginForm from "./components/LoginForm/LoginForm";
 
-import pfesLogo from "./pfes-logo.png";
+import pfesLogo from "../../assets/img/pfes-logo.png";
 import bg from "./bg.jpg";
 
 const styles = theme => ({

@@ -9,18 +9,18 @@ import {
 import { Menu } from "@material-ui/icons";
 import { withStyles } from "@material-ui/core/styles";
 
-const drawerWidth = 240;
+const drawerWidth = 250;
 
 const styles = theme => ({
   appBar: {
     marginLeft: drawerWidth,
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up("md")]: {
       width: `calc(100% - ${drawerWidth}px)`
     }
   },
   menuButton: {
     marginRight: 20,
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up("md")]: {
       display: "none"
     }
   }
@@ -41,6 +41,7 @@ class Header extends Component {
           >
             <Menu />
           </IconButton>
+
           <Typography variant="h6" color="inherit" noWrap>
             PFES App
           </Typography>
