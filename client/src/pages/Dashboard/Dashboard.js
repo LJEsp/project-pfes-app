@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
 import Header from "./components/Header/Header";
 import AppDrawer from "./components/AppDrawer/AppDrawer";
 import JobOrders from "./scenes/JobOrders/JobOrders";
+import ManageUsers from "./scenes/ManageUsers/ManageUsers";
 
 const drawerWidth = 250;
 
@@ -16,7 +19,7 @@ const styles = theme => ({
       flexShrink: 0
     }
   },
-  jobOrders: {
+  mainSection: {
     width: "100%",
     marginTop: 64,
     padding: theme.spacing.unit
@@ -33,7 +36,7 @@ class Dashboard extends Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, match } = this.props;
 
     return (
       <div className={classes.root}>
@@ -46,8 +49,10 @@ class Dashboard extends Component {
 
         <Header drawerToggle={this.handleDrawerToggle} />
 
-        <div className={classes.jobOrders}>
-          <JobOrders />
+        <div className={classes.mainSection}>
+          <Route path={`${match.url}/job-orders`} component={JobOrders} />
+
+          <Route path={`${match.url}/manage-users`} component={ManageUsers} />
         </div>
       </div>
     );

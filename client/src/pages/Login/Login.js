@@ -1,12 +1,10 @@
 import React, { Component, Fragment } from "react";
 import { Grid } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
-import compose from "recompose/compose";
 
 import LoginForm from "./components/LoginForm/LoginForm";
 
 import pfesLogo from "../../assets/img/pfes-logo.png";
-import bg from "./bg.jpg";
 
 const styles = theme => ({
   root: {

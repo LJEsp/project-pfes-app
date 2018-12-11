@@ -4,10 +4,15 @@ import {
   Toolbar,
   Typography,
   Button,
-  IconButton
+  IconButton,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem
 } from "@material-ui/core";
 import { Menu } from "@material-ui/icons";
 import { withStyles } from "@material-ui/core/styles";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
 
 const drawerWidth = 250;
 
@@ -19,10 +24,17 @@ const styles = theme => ({
     }
   },
   menuButton: {
-    marginRight: 20,
+    marginRight: theme.spacing.unit,
     [theme.breakpoints.up("md")]: {
       display: "none"
     }
+  },
+  actionButton: {
+    marginLeft: theme.spacing.unit * 2,
+    backgroundColor: theme.palette.common.white
+  },
+  actionIcon: {
+    marginRight: theme.spacing.unit
   }
 });
 
@@ -43,8 +55,12 @@ class Header extends Component {
           </IconButton>
 
           <Typography variant="h6" color="inherit" noWrap>
-            PFES App
+            My Job Orders
           </Typography>
+
+          <Button className={classes.actionButton} variant="contained">
+            <AddCircleIcon className={classes.actionIcon} /> New Job Order
+          </Button>
         </Toolbar>
       </AppBar>
     );

@@ -12,6 +12,7 @@ import {
   Chip,
   Avatar
 } from "@material-ui/core";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import WorkIcon from "@material-ui/icons/Work";
 import GroupIcon from "@material-ui/icons/Group";
@@ -29,7 +30,7 @@ const styles = theme => ({
     width: drawerWidth
   },
   drawerContents: {
-    paddingTop: theme.spacing.unit
+    paddingTop: theme.spacing.unit * 2
   },
   logo: {
     width: "50%",
@@ -44,7 +45,20 @@ const styles = theme => ({
     paddingLeft: theme.spacing.unit,
     paddingRight: theme.spacing.unit,
     paddingBottom: theme.spacing.unit * 2
-  }
+  },
+  chipIcon: {
+    marginLeft: theme.spacing.unit,
+  },
+  menuItem: {
+    "&:focus": {
+      backgroundColor: theme.palette.primary.main,
+      "& $menuIcon, & $menuText": {
+        color: "white"
+      }
+    }
+  },
+  menuIcon: {},
+  menuText: {}
 });
 
 class AppDrawer extends React.Component {
@@ -67,7 +81,7 @@ class AppDrawer extends React.Component {
           </Typography>
 
           <Chip
-            icon={<BuildIcon fontSize="small" />}
+            icon={<BuildIcon className={classes.chipIcon} fontSize="small" />}
             label="Administrator"
             color="primary"
           />
@@ -76,33 +90,46 @@ class AppDrawer extends React.Component {
         <Divider />
 
         <List component="nav">
-          <ListItem button>
-            <ListItemIcon>
-              <WorkIcon />
-            </ListItemIcon>
+          <Link to="/app/job-orders">
+            <ListItem button className={classes.menuItem}>
+              <ListItemIcon className={classes.menuIcon}>
+                <WorkIcon />
+              </ListItemIcon>
 
-            <ListItemText primary="My Job Orders" />
-          </ListItem>
+              <ListItemText
+                classes={{ primary: classes.menuText }}
+                primary="My Job Orders"
+              />
+            </ListItem>
+          </Link>
 
-          <ListItem button>
-            <ListItemIcon>
+          <ListItem button className={classes.menuItem}>
+            <ListItemIcon className={classes.menuIcon}>
               <GroupIcon />
             </ListItemIcon>
 
-            <ListItemText primary="All Job Orders" />
+            <ListItemText
+              primary="All Job Orders"
+              classes={{ primary: classes.menuText }}
+            />
           </ListItem>
         </List>
 
         <Divider />
 
         <List component="nav">
-          <ListItem button>
-            <ListItemIcon>
-              <AccountCircleIcon />
-            </ListItemIcon>
+          <Link to="/app/manage-users">
+            <ListItem button className={classes.menuItem}>
+              <ListItemIcon className={classes.menuIcon}>
+                <AccountCircleIcon />
+              </ListItemIcon>
 
-            <ListItemText primary="Manage Users" />
-          </ListItem>
+              <ListItemText
+                primary="Manage Users"
+                classes={{ primary: classes.menuText }}
+              />
+            </ListItem>
+          </Link>
         </List>
 
         <Divider />
