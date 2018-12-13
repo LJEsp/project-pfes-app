@@ -47,7 +47,7 @@ const styles = theme => ({
     paddingBottom: theme.spacing.unit * 2
   },
   chipIcon: {
-    marginLeft: theme.spacing.unit,
+    marginLeft: theme.spacing.unit
   },
   menuItem: {
     "&:focus": {
@@ -90,7 +90,7 @@ class AppDrawer extends React.Component {
         <Divider />
 
         <List component="nav">
-          <Link to="/app/job-orders">
+          <Link to="/app/my-job-orders">
             <ListItem button className={classes.menuItem}>
               <ListItemIcon className={classes.menuIcon}>
                 <WorkIcon />
@@ -103,16 +103,18 @@ class AppDrawer extends React.Component {
             </ListItem>
           </Link>
 
-          <ListItem button className={classes.menuItem}>
-            <ListItemIcon className={classes.menuIcon}>
-              <GroupIcon />
-            </ListItemIcon>
+          <Link to="/app/all-job-orders">
+            <ListItem button className={classes.menuItem}>
+              <ListItemIcon className={classes.menuIcon}>
+                <GroupIcon />
+              </ListItemIcon>
 
-            <ListItemText
-              primary="All Job Orders"
-              classes={{ primary: classes.menuText }}
-            />
-          </ListItem>
+              <ListItemText
+                primary="All Job Orders"
+                classes={{ primary: classes.menuText }}
+              />
+            </ListItem>
+          </Link>
         </List>
 
         <Divider />

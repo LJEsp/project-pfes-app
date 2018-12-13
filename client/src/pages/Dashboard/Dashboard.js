@@ -38,11 +38,10 @@ class Dashboard extends Component {
 
   handleCreateDialogToggle = () => {
     this.setState(state => ({ isCreateDialogOpen: !state.isCreateDialogOpen }));
-    console.log("test");
   };
 
   render() {
-    const { classes, match } = this.props;
+    const { classes, match, location } = this.props;
     const { isCreateDialogOpen } = this.state;
 
     return (
@@ -57,11 +56,12 @@ class Dashboard extends Component {
         <Header
           drawerToggle={this.handleDrawerToggle}
           createDialogToggle={this.handleCreateDialogToggle}
+          location={location}
         />
 
         <div className={classes.mainSection}>
           <Route
-            path={`${match.url}/job-orders`}
+            path={`${match.url}/my-job-orders`}
             render={props => (
               <JobOrders
                 {...props}

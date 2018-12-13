@@ -39,8 +39,31 @@ const styles = theme => ({
 });
 
 class Header extends Component {
+  getTitle = () => {
+    const {
+      location: { pathname }
+    } = this.props;
+
+    console.log("test", pathname);
+    switch (pathname) {
+      case "/app/my-job-orders":
+        return "My Job Orders";
+
+      case "/app/all-job-orders":
+        return "All Job Orders";
+
+      case "/app/manage-users":
+        return "Manage Users";
+
+      default:
+        return "Unknown"
+    }
+  };
+
   render() {
     const { classes, drawerToggle } = this.props;
+
+    this.getTitle();
 
     return (
       <AppBar position="fixed" className={classes.appBar}>
@@ -55,7 +78,7 @@ class Header extends Component {
           </IconButton>
 
           <Typography variant="h6" color="inherit" noWrap>
-            My Job Orders
+            {this.getTitle()}
           </Typography>
 
           <Button

@@ -3,7 +3,6 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
-  DialogContentText,
   DialogActions,
   Button,
   FormControl,
@@ -15,8 +14,7 @@ import {
   TextField,
   Grid,
   MenuItem,
-  Typography,
-  Paper
+  Typography
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 
@@ -43,7 +41,7 @@ export class CreateDialog extends Component {
         scroll="body"
       >
         <DialogTitle id="create-dialog" disableTypography>
-          <Typography variant="h5" color="primary">
+          <Typography variant="h4" color="primary">
             New Job Order
           </Typography>
         </DialogTitle>
@@ -78,29 +76,29 @@ export class CreateDialog extends Component {
           {/* //////////// CONTACT DETAILS //////////// */}
 
           <FormControl component="fieldset" fullWidth>
-            <Typography variant="h6">Contact Details</Typography>
+            <Typography variant="h5">Contact Details</Typography>
 
             <Grid container spacing={16} className={classes.formGroup}>
-              <Grid item item xs={12} sm={4}>
+              <Grid item xs={12} sm={4}>
                 <TextField label="Contact Name" margin="normal" fullWidth />
               </Grid>
 
-              <Grid item item xs={12} sm={4}>
+              <Grid item xs={12} sm={4}>
                 <TextField label="Contact Number" margin="normal" fullWidth />
               </Grid>
 
-              <Grid item item xs={12} sm={4}>
+              <Grid item xs={12} sm={4}>
                 <TextField label="Contact Email" margin="normal" fullWidth />
               </Grid>
             </Grid>
           </FormControl>
 
-          <Divider className={classes.divider} />
+          {/* <Divider className={classes.divider} /> */}
 
           {/* //////////// JOB ORDER DETAILS //////////// */}
 
           <FormControl fullWidth={true} component="fieldset">
-            <Typography variant="h6">Job Order Details</Typography>
+            <Typography variant="h5">Job Order Details</Typography>
 
             <Grid container spacing={16}>
               <Grid item xs={12} sm={6}>
@@ -205,7 +203,7 @@ export class CreateDialog extends Component {
             </Grid>
           </FormControl>
 
-          <Divider className={classes.divider} />
+          {/* <Divider className={classes.divider} /> */}
 
           {/* //////////// PICKUP DATE, ETD, ETA //////////// */}
 
@@ -252,7 +250,7 @@ export class CreateDialog extends Component {
             </Grid>
           </Grid>
 
-          <Typography variant="h6">Remarks</Typography>
+          <Typography variant="h5">Remarks</Typography>
 
           <Grid container spacing={16} className={classes.formGroup}>
             <Grid item xs={12}>
