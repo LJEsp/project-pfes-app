@@ -8,7 +8,7 @@ import { store } from "./services/session/store";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./services/utils/setAuthToken";
 
-import { setCurrentUser, logoutUser } from "./services/session/actions";
+import { setCurrentUser, logoutUser } from "./services/session/actions/authActions";
 
 import { Login, Dashboard } from "./pages";
 
