@@ -1,15 +1,15 @@
 // app
 
-import { VIEW_CHANGE } from "../actions/types";
+import { APP_VIEW_CHANGE } from "../actions/types";
 
 const initialState = {
-  currentView: "",
+  currentView: null,
   loading: false
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case VIEW_CHANGE:
+    case APP_VIEW_CHANGE:
       return {
         ...state,
         currentView: action.payload

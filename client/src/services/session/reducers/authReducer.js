@@ -1,6 +1,6 @@
 // auth
 
-// import {} from "../actions/types";
+import { AUTH_USER_SET } from "../actions/types";
 
 const initialState = {
   isAuthenticated: false,
@@ -9,7 +9,14 @@ const initialState = {
 };
 
 export default function(state = initialState, action) {
-  switch (action) {
+  switch (action.type) {
+    case AUTH_USER_SET:
+      return {
+        ...state,
+        isAuthenticated: true,
+        user: action.payload
+      };
+
     default:
       return state;
   }

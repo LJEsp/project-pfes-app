@@ -24,6 +24,7 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 import { connect } from "react-redux";
 import { changeView } from "../../../../services/session/actions/appActions";
+import { viewEnums } from "../../../../services/enums";
 
 const drawerWidth = 250;
 
@@ -97,7 +98,10 @@ class AppDrawer extends React.Component {
         <Divider />
 
         <List component="nav">
-          <Link to="/app/my-job-orders" onClick={() => changeView("123")}>
+          <Link
+            to="/app/my-job-orders"
+            onClick={() => changeView(viewEnums.MY_JOB_ORDERS)}
+          >
             <ListItem button className={classes.menuItem}>
               <ListItemIcon className={classes.menuIcon}>
                 <WorkIcon />
@@ -110,7 +114,10 @@ class AppDrawer extends React.Component {
             </ListItem>
           </Link>
 
-          <Link to="/app/all-job-orders">
+          <Link
+            to="/app/all-job-orders"
+            onClick={() => changeView(viewEnums.ALL_JOB_ORDERS)}
+          >
             <ListItem button className={classes.menuItem}>
               <ListItemIcon className={classes.menuIcon}>
                 <GroupIcon />
@@ -127,7 +134,10 @@ class AppDrawer extends React.Component {
         <Divider />
 
         <List component="nav">
-          <Link to="/app/manage-users">
+          <Link
+            to="/app/manage-users"
+            onClick={() => changeView(viewEnums.MANAGE_USERS)}
+          >
             <ListItem button className={classes.menuItem}>
               <ListItemIcon className={classes.menuIcon}>
                 <AccountCircleIcon />

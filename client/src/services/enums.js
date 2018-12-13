@@ -1,8 +1,8 @@
-const rolesEnums = {
-  ADMINISTRATOR: 1,
-  SALES: 2,
-  OPERATIONS: 3,
-  VIEWER: 4,
+const roleEnums = {
+  ADMINISTRATOR: "administrator",
+  SALES: "sales",
+  OPERATIONS: "operations",
+  VIEWER: "viewer",
   properties: {
     ADMINISTRATOR: { name: "Administrator" },
     SALES: { name: "sales" },
@@ -11,11 +11,11 @@ const rolesEnums = {
   }
 };
 
-const viewsEnums = {
-  LOGIN: 1,
-  MY_JOB_ORDERS: 2,
-  ALL_JOB_ORDERS: 3,
-  MANAGE_USERS: 4,
+const viewEnums = {
+  LOGIN: "login",
+  MY_JOB_ORDERS: "myJobOrders",
+  ALL_JOB_ORDERS: "allJobOrders",
+  MANAGE_USERS: "manageUsers",
   properties: {
     LOGIN: { name: "Login" },
     MY_JOB_ORDERS: { name: "My Job Orders" },
@@ -25,6 +25,6 @@ const viewsEnums = {
 };
 
 module.exports = {
-  rolesEnums,
-  viewsEnums
+  roleEnums,
+  viewEnums
 };

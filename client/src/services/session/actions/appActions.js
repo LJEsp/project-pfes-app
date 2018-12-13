@@ -1,8 +1,8 @@
-import { VIEW_CHANGE } from "./types";
+import { APP_VIEW_CHANGE } from "./types";
 
 export const changeView = view => dispatch => {
   dispatch({
-    type: VIEW_CHANGE,
+    type: APP_VIEW_CHANGE,
     payload: view
   });
 };

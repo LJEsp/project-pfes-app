@@ -1,1 +1,2 @@
-export const VIEW_CHANGE = "VIEW_CHANGE";
+export const APP_VIEW_CHANGE = "APP_VIEW_CHANGE";
+export const AUTH_USER_SET = "AUTH_USER_SET"

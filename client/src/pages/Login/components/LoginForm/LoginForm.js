@@ -3,6 +3,9 @@ import React, { Component, Fragment } from "react";
 import { Paper, Typography, TextField, Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 
+import { connect } from "react-redux";
+import { logInUser } from "../../../../services/session/actions/authActions";
+
 const styles = theme => ({
   headingContainer: {
     marginBottom: theme.spacing.unit
@@ -22,6 +25,26 @@ const styles = theme => ({
 });
 
 class LoginForm extends Component {
+  state = {
+    username: "",
+    password: ""
+  };
+
+  handleInputChange = () => e => {
+    e.preventDefault();
+
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  handleLogIn = () => e => {
+    e.preventDefault();
+
+    this.props.logInUser({
+      username: this.state.username,
+      password: this.state.password
+    });
+  };
+
   render() {
     const { classes } = this.props;
 
@@ -40,25 +63,31 @@ class LoginForm extends Component {
         <form className={classes.formContainer}>
           <TextField
             label="Username"
-            // value={this.state.username}
-            // onChange={}
             fullWidth
             margin="normal"
             variant="outlined"
+            name="username"
+            value={this.state.username}
+            onChange={this.handleInputChange()}
           />
 
           <TextField
             className={classes.passwordField}
             label="Password"
-            // value={this.state.username}
-            // onChange={}
             type="password"
             fullWidth
             margin="normal"
             variant="outlined"
+            name="password"
+            value={this.state.password}
+            onChange={this.handleInputChange()}
           />
 
-          <Button variant="contained" color="primary">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={this.handleLogIn()}
+          >
             Log in
           </Button>
         </form>
@@ -67,4 +96,13 @@ class LoginForm extends Component {
   }
 }
 
-export default withStyles(styles)(LoginForm);
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = {
+  logInUser
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(LoginForm));
