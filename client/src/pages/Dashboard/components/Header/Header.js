@@ -58,7 +58,11 @@ class Header extends Component {
             My Job Orders
           </Typography>
 
-          <Button className={classes.actionButton} variant="contained">
+          <Button
+            className={classes.actionButton}
+            variant="contained"
+            onClick={this.props.createDialogToggle}
+          >
             <AddCircleIcon className={classes.actionIcon} /> New Job Order
           </Button>
         </Toolbar>

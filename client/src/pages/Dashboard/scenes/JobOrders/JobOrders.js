@@ -11,11 +11,16 @@ import CreateDialog from "./components/CreateDialog/CreateDialog";
 
 export class JobOrders extends Component {
   render() {
+    const { isCreateDialogOpen, createDialogToggle } = this.props;
+
     return (
       <Fragment>
         <JobOrdersTable />
-        
-        <CreateDialog />
+
+        <CreateDialog
+          isCreateDialogOpen={isCreateDialogOpen}
+          createDialogToggle={createDialogToggle}
+        />
       </Fragment>
     );
   }
