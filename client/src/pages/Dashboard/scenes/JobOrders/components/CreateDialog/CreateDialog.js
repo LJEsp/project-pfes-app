@@ -275,7 +275,7 @@ export class CreateDialog extends Component {
             </Button>
 
             <Button variant="contained" color="primary">
-              Create
+              Create Job Order
             </Button>
           </DialogActions>
         </DialogContent>

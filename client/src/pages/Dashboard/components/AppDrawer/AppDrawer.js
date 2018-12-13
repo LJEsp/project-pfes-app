@@ -13,6 +13,8 @@ import {
   Avatar
 } from "@material-ui/core";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { withStyles } from "@material-ui/core/styles";
+import pfesLogo from "../../../../assets/img/pfes-logo.png";
 
 import WorkIcon from "@material-ui/icons/Work";
 import GroupIcon from "@material-ui/icons/Group";
@@ -20,8 +22,8 @@ import BuildIcon from "@material-ui/icons/Build";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
-import { withStyles } from "@material-ui/core/styles";
-import pfesLogo from "../../../../assets/img/pfes-logo.png";
+import { connect } from "react-redux";
+import { changeView } from "../../../../services/session/actions/appActions";
 
 const drawerWidth = 250;
 
@@ -63,7 +65,12 @@ const styles = theme => ({
 
 class AppDrawer extends React.Component {
   render() {
-    const { classes, theme, isMobileOpen, drawerToggle } = this.props;
+    // HOC
+    const { classes, theme } = this.props;
+    // Props
+    const { isMobileOpen, drawerToggle } = this.props;
+    // Actions
+    const { changeView } = this.props;
 
     const drawerContents = (
       <Grid
@@ -90,7 +97,7 @@ class AppDrawer extends React.Component {
         <Divider />
 
         <List component="nav">
-          <Link to="/app/my-job-orders">
+          <Link to="/app/my-job-orders" onClick={() => changeView("123")}>
             <ListItem button className={classes.menuItem}>
               <ListItemIcon className={classes.menuIcon}>
                 <WorkIcon />
@@ -181,4 +188,13 @@ class AppDrawer extends React.Component {
   }
 }
 
-export default withStyles(styles, { withTheme: true })(AppDrawer);
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = {
+  changeView
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles, { withTheme: true })(AppDrawer));

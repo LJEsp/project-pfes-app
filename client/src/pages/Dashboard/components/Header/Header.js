@@ -8,7 +8,8 @@ import {
   FormControl,
   InputLabel,
   Select,
-  MenuItem
+  MenuItem,
+  Fab
 } from "@material-ui/core";
 import { Menu } from "@material-ui/icons";
 import { withStyles } from "@material-ui/core/styles";
@@ -44,7 +45,6 @@ class Header extends Component {
       location: { pathname }
     } = this.props;
 
-    console.log("test", pathname);
     switch (pathname) {
       case "/app/my-job-orders":
         return "My Job Orders";
@@ -56,14 +56,12 @@ class Header extends Component {
         return "Manage Users";
 
       default:
-        return "Unknown"
+        return "Unknown";
     }
   };
 
   render() {
     const { classes, drawerToggle } = this.props;
-
-    this.getTitle();
 
     return (
       <AppBar position="fixed" className={classes.appBar}>
@@ -81,10 +79,19 @@ class Header extends Component {
             {this.getTitle()}
           </Typography>
 
+          <Fab
+            className={classes.actionButton}
+            variant="extended"
+            size="large"
+            onClick={this.props.createDialogToggle}
+          >
+            <AddCircleIcon className={classes.actionIcon} /> New Job Order
+          </Fab>
+
           <Button
             className={classes.actionButton}
-            variant="contained"
             onClick={this.props.createDialogToggle}
+            variant="contained"
           >
             <AddCircleIcon className={classes.actionIcon} /> New Job Order
           </Button>

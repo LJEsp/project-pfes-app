@@ -29,7 +29,8 @@ const styles = theme => ({
 class Dashboard extends Component {
   state = {
     isMobileOpen: false,
-    isCreateDialogOpen: false
+    isCreateDialogOpen: false,
+    isCreateUserDialogOpen: false
   };
 
   handleDrawerToggle = () => {
@@ -40,9 +41,15 @@ class Dashboard extends Component {
     this.setState(state => ({ isCreateDialogOpen: !state.isCreateDialogOpen }));
   };
 
+  handleCreateUserDialogToggle = () => {
+    this.setState(state => ({
+      isCreateUserDialogOpen: !state.isCreateUserDialogOpen
+    }));
+  };
+
   render() {
     const { classes, match, location } = this.props;
-    const { isCreateDialogOpen } = this.state;
+    const { isCreateDialogOpen, isCreateUserDialogOpen } = this.state;
 
     return (
       <div className={classes.root}>
@@ -71,7 +78,16 @@ class Dashboard extends Component {
             )}
           />
 
-          <Route path={`${match.url}/manage-users`} component={ManageUsers} />
+          <Route
+            path={`${match.url}/manage-users`}
+            render={props => (
+              <ManageUsers
+                {...props}
+                isCreateUserDialogOpen={isCreateUserDialogOpen}
+                createUserDialogToggle={this.handleCreateUserDialogToggle}
+              />
+            )}
+          />
         </div>
       </div>
     );
