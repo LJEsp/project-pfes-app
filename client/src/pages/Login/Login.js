@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import { connect } from "react-redux";
 import { Grid } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 
@@ -10,7 +11,7 @@ const styles = theme => ({
   root: {
     height: "100vh",
     margin: "0 auto",
-    position: "relative",
+    position: "relative"
     // backgroundImage: `linear-gradient(to top, ${
     //   theme.palette.primary.main
     // }, white)`
@@ -36,6 +37,12 @@ const styles = theme => ({
 });
 
 class Login extends Component {
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/app");
+    }
+  }
+
   render() {
     const { classes } = this.props;
 
@@ -60,4 +67,13 @@ class Login extends Component {
   }
 }
 
-export default withStyles(styles)(Login);
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+const mapDispatchToProps = {};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(Login));

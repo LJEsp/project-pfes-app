@@ -24,6 +24,7 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 import { connect } from "react-redux";
 import { changeView } from "../../../../services/session/actions/appActions";
+import { logOutUser } from "../../../../services/session/actions/authActions";
 import { viewEnums } from "../../../../services/enums";
 
 const drawerWidth = 250;
@@ -71,7 +72,7 @@ class AppDrawer extends React.Component {
     // Props
     const { isMobileOpen, drawerToggle } = this.props;
     // Actions
-    const { changeView } = this.props;
+    const { changeView, logOutUser } = this.props;
 
     const drawerContents = (
       <Grid
@@ -154,7 +155,7 @@ class AppDrawer extends React.Component {
         <Divider />
 
         <List component="nav">
-          <ListItem button>
+          <ListItem button onClick={() => logOutUser()}>
             <ListItemIcon>
               <ExitToAppIcon />
             </ListItemIcon>
@@ -201,7 +202,8 @@ class AppDrawer extends React.Component {
 const mapStateToProps = state => ({});
 
 const mapDispatchToProps = {
-  changeView
+  changeView,
+  logOutUser
 };
 
 export default connect(

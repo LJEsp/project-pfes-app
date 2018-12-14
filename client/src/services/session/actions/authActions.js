@@ -2,7 +2,7 @@ import axios from "axios";
 import setAuthToken from "../../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 
-import { AUTH_USER_SET } from "./types.js";
+import { AUTH_USER_SET, AUTH_USER_LOGOUT } from "./types.js";
 
 export const logInUser = userData => dispatch => {
   axios.post("/api/users/login", userData).then(res => {
@@ -17,7 +17,7 @@ export const logInUser = userData => dispatch => {
     // Set current user
     dispatch(setCurrentUser(decoded));
 
-    console.log(decoded);
+    window.location.href = "/app";
   });
   // .catch(err => {
   //   dispatch({
@@ -34,4 +34,17 @@ export const setCurrentUser = decoded => {
   };
 };
 
-export const logoutUser = () => {};
+export const logOutUser = () => dispatch => {
+  // >>> Remove token from localStorage
+  localStorage.removeItem("jwtToken");
+
+  // >>> Remove auth header for future requests
+  setAuthToken(false);
+
+  // Set current user to {} which will set isAuthenticated to false
+  dispatch(setCurrentUser({}));
+
+  window.location.href = "/";
+
+  dispatch({ type: AUTH_USER_LOGOUT });
+};

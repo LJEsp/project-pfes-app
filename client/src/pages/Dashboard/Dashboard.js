@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Switch, Route, Router } from "react-router-dom";
 
 import Header from "./components/Header/Header";
 import AppDrawer from "./components/AppDrawer/AppDrawer";
