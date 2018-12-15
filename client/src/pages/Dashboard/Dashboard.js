@@ -77,6 +77,7 @@ class Dashboard extends Component {
         <Header
           drawerToggle={this.handleDrawerToggle}
           createDialogToggle={this.handleCreateDialogToggle}
+          createUserDialogToggle={this.handleCreateUserDialogToggle}
           location={location}
         />
 

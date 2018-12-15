@@ -6,6 +6,7 @@ const keys = require("../../config/keys");
 const passport = require("passport");
 
 const User = require("../../models/User");
+const { roleEnums } = require("../../utils/enums");
 
 const validateLogin = require("../../validation/validateLogin");
 const validateRegister = require("../../validation/validateRegister");
@@ -146,7 +147,7 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     // Only an admin can see all users
-    if (req.user.role !== "admin") {
+    if (req.user.role !== roleEnums.ADMINISTRATOR) {
       return res.status(401).json({ error: "Unauthorized" });
     }
 

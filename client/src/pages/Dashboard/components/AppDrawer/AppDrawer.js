@@ -70,7 +70,7 @@ class AppDrawer extends React.Component {
   render() {
     // >>> HOC
     const { classes, theme } = this.props;
-    // >>> Props
+    // >>> Parent
     const { isMobileOpen, drawerToggle } = this.props;
     // >>> Actions
     const { changeView, logOutUser } = this.props;

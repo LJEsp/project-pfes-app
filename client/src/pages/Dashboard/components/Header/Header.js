@@ -34,7 +34,8 @@ const styles = theme => ({
   },
   actionButton: {
     marginLeft: theme.spacing.unit * 2,
-    backgroundColor: theme.palette.common.white
+    backgroundColor: theme.palette.common.white,
+    height: "40px"
   },
   actionIcon: {
     marginRight: theme.spacing.unit
@@ -47,7 +48,16 @@ class Header extends Component {
   };
 
   render() {
-    const { classes, drawerToggle } = this.props;
+    // >>> HOC
+    const { classes } = this.props;
+    // >>> Parent
+    const {
+      drawerToggle,
+      createDialogToggle,
+      createUserDialogToggle
+    } = this.props;
+    // >>> Store
+    const { currentView } = this.props;
 
     return (
       <AppBar position="fixed" className={classes.appBar}>
@@ -65,22 +75,35 @@ class Header extends Component {
             {this.getTitle()}
           </Typography>
 
-          <Fab
-            className={classes.actionButton}
-            variant="extended"
-            size="large"
-            onClick={this.props.createDialogToggle}
-          >
-            <AddCircleIcon className={classes.actionIcon} /> New Job Order
-          </Fab>
+          {(currentView => {
+            switch (currentView) {
+              case viewEnums.MY_JOB_ORDERS:
+              case viewEnums.ALL_JOB_ORDERS:
+                return (
+                  <Fab
+                    className={classes.actionButton}
+                    variant="extended"
+                    size="large"
+                    onClick={this.props.createDialogToggle}
+                  >
+                    <AddCircleIcon className={classes.actionIcon} /> Create Job
+                    Order
+                  </Fab>
+                );
 
-          <Button
-            className={classes.actionButton}
-            onClick={this.props.createDialogToggle}
-            variant="contained"
-          >
-            <AddCircleIcon className={classes.actionIcon} /> New Job Order
-          </Button>
+              case viewEnums.MANAGE_USERS:
+                return (
+                  <Fab
+                    className={classes.actionButton}
+                    variant="extended"
+                    size="large"
+                    onClick={this.props.createUserDialogToggle}
+                  >
+                    <AddCircleIcon className={classes.actionIcon} /> Create User
+                  </Fab>
+                );
+            }
+          })(currentView)}
         </Toolbar>
       </AppBar>
     );

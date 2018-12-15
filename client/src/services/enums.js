@@ -4,7 +4,7 @@ const viewEnums = {
   ALL_JOB_ORDERS: "ALL_JOB_ORDERS",
   MANAGE_USERS: "MANAGE_USERS",
   properties: {
-    LOGIN: { name: "Login", route: "" },
+    LOGIN: { name: "", route: "" },
     MY_JOB_ORDERS: { name: "My Job Orders", route: "/app/my-job-orders" },
     ALL_JOB_ORDERS: { name: "All Job Orders", route: "/app/all-job-orders" },
     MANAGE_USERS: { name: "Manage Users", route: "/app/manage-users" }
@@ -20,7 +20,7 @@ const roleEnums = {
   properties: {
     ADMINISTRATOR: {
       name: "Administrator",
-      defaultView: viewEnums.MANAGE_USERS
+      defaultView: viewEnums.MY_JOB_ORDERS
     },
     SALES: { name: "sales", defaultView: viewEnums.MY_JOB_ORDERS },
     OPERATIONS: { name: "Operations", defaultView: viewEnums.ALL_JOB_ORDERS },

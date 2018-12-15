@@ -35,13 +35,13 @@ export class CreateUserDialog extends Component {
     const {
       classes,
       isCreateUserDialogOpen,
-      CreateUserDialogToggle
+      createUserDialogToggle
     } = this.props;
 
     return (
       <Dialog
         open={isCreateUserDialogOpen}
-        onClose={CreateUserDialogToggle}
+        onClose={createUserDialogToggle}
         aria-labelledby="create-dialog"
         maxWidth="sm"
         fullWidth
@@ -140,7 +140,7 @@ export class CreateUserDialog extends Component {
             <Button
               variant="outlined"
               color="inherit"
-              onClick={CreateUserDialogToggle}
+              onClick={createUserDialogToggle}
             >
               Cancel
             </Button>

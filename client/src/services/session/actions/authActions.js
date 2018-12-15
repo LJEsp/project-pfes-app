@@ -50,3 +50,4 @@ export const logOutUser = () => dispatch => {
 
   dispatch({ type: AUTH_USER_LOGOUT });
 };
+
