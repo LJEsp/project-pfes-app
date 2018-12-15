@@ -2,19 +2,21 @@ import axios from "axios";
 import setAuthToken from "../../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 
-import { AUTH_USER_SET, AUTH_USER_LOGOUT } from "./types.js";
+import { AUTH_USER_SET, AUTH_USER_LOGOUT, APP_VIEW_CHANGE } from "./types.js";
+import { roleEnums } from "../../enums";
 
 export const logInUser = userData => dispatch => {
   axios.post("/api/users/login", userData).then(res => {
-    // Save to localStorage
+    // >>> Save to localStorage
     const { token } = res.data;
-    // Set token to ls
+    // >>> Set token to ls
     localStorage.setItem("jwtToken", token);
-    // Set token to Auth header
+    // >>> Set token to Auth header
     setAuthToken(token);
-    // Decode token to get user data
+    // >>> Decode token to get user data
     const decoded = jwt_decode(token);
-    // Set current user
+    // >>> Set current user
+
     dispatch(setCurrentUser(decoded));
 
     window.location.href = "/app";

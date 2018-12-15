@@ -26,7 +26,7 @@ router.post("/login", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
-  // Validate login
+  // >>> Validate login
   const { errors, isValid } = validateLogin(req.body);
   if (!isValid) {
     return res.status(400).json(errors);
@@ -35,19 +35,20 @@ router.post("/login", (req, res) => {
   // Find user by username in the database
   User.findOne({ username: username })
     .then(user => {
-      // Check if user exists
+      // >>> Check if user exists
       if (!user) {
         errors.username = "User not found";
         return res.status(404).json(errors);
       }
 
-      // Check password
+      // >>> Check password
       bcrypt.compare(password, user.password).then(isMatch => {
         if (isMatch) {
-          // Passwords matched, create JWT payload
+          // >>> Passwords matched, create JWT payload
           const payload = {
             id: user.id,
             username: user.username,
+            role: user.role,
             firstName: user.firstName,
             lastName: user.lastName,
             middleName: user.middleName,
@@ -58,7 +59,7 @@ router.post("/login", (req, res) => {
             logsCompleted: user.logsCompleted
           };
 
-          // Sign token (expires in 1 hour / 3600 seconds)
+          // >>> Sign token (expires in 1 hour / 3600 seconds)
           jwt.sign(
             payload,
             keys.secretOrKey,
@@ -89,26 +90,26 @@ router.post(
   "/register",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    // Only an admin can register a new user
-    if (req.user.userType !== "admin") {
+    // >>> Only an admin can register a new user
+    if (req.user.role !== "admin") {
       return res.status(401).json({ error: "Unauthorized" });
     }
 
-    // Validate registration
+    // >>> Validate registration
     const { errors, isValid } = validateRegister(req.body);
     if (!isValid) {
       return res.status(400).json(errors);
     }
 
     User.findOne({ username: req.body.username }).then(user => {
-      // Check to see if the username already exists in the database
+      // >>> Check to see if the username already exists in the database
       if (user) {
         return res.status(400).json({ error: "Username already exists" });
       } else {
-        // Create new user
+        // >>> Create new user
         const newUser = new User({
           username: req.body.username,
-          userType: req.body.userType,
+          role: req.body.role,
           firstName: req.body.firstName,
           lastName: req.body.lastName,
           middleName: req.body.middleName,
@@ -117,8 +118,8 @@ router.post(
           password: req.body.password
         });
 
-        // Generate hash for password
-        bcrypt.genSalt(10, (err, salt) => {
+        // >>> Generate hash for password
+        bcrypt.genSalt(12, (err, salt) => {
           bcrypt.hash(newUser.password, salt, (err, hash) => {
             if (err) throw err;
 
@@ -145,7 +146,7 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     // Only an admin can see all users
-    if (req.user.userType !== "admin") {
+    if (req.user.role !== "admin") {
       return res.status(401).json({ error: "Unauthorized" });
     }
 

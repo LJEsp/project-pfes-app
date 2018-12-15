@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import {
   AppBar,
   Toolbar,
@@ -14,6 +15,7 @@ import {
 import { Menu } from "@material-ui/icons";
 import { withStyles } from "@material-ui/core/styles";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
+import { viewEnums } from "../../../../services/enums";
 
 const drawerWidth = 250;
 
@@ -41,23 +43,7 @@ const styles = theme => ({
 
 class Header extends Component {
   getTitle = () => {
-    const {
-      location: { pathname }
-    } = this.props;
-
-    switch (pathname) {
-      case "/app/my-job-orders":
-        return "My Job Orders";
-
-      case "/app/all-job-orders":
-        return "All Job Orders";
-
-      case "/app/manage-users":
-        return "Manage Users";
-
-      default:
-        return "Unknown";
-    }
+    return viewEnums.properties[this.props.currentView].name || "";
   };
 
   render() {
@@ -101,4 +87,14 @@ class Header extends Component {
   }
 }
 
-export default withStyles(styles)(Header);
+const mapStateToProps = state => ({
+  user: state.auth.user,
+  currentView: state.app.currentView
+});
+
+const mapDispatchToProps = {};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(Header));

@@ -71,7 +71,7 @@ class App extends Component {
               <Route render={() => <h1>Not found</h1>} />
             </Switch>
 
-            <Route
+            {/* <Route
               path="/app"
               render={() =>
                 isAuthenticated ? (
@@ -80,7 +80,7 @@ class App extends Component {
                   <Redirect to="/" />
                 )
               }
-            />
+            /> */}
           </div>
         </Router>
       </Provider>

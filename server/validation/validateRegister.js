@@ -5,7 +5,7 @@ module.exports = function validateRegister(data) {
   let errors = {};
 
   data.username = !_.isEmpty(data.username) ? data.username : "";
-  data.userType = !_.isEmpty(data.userType) ? data.userType : "";
+  data.role = !_.isEmpty(data.role) ? data.role : "";
   data.firstName = !_.isEmpty(data.firstName) ? data.firstName : "";
   data.lastName = !_.isEmpty(data.lastName) ? data.lastName : "";
   data.middleName = !_.isEmpty(data.middleName) ? data.middleName : "";
@@ -22,9 +22,9 @@ module.exports = function validateRegister(data) {
     errors.username = "Username is required.";
   }
 
-  // userType
-  if (Validator.isEmpty(data.userType)) {
-    errors.userType = "User type is required.";
+  // role
+  if (Validator.isEmpty(data.role)) {
+    errors.role = "User type is required.";
   }
 
   // firstName

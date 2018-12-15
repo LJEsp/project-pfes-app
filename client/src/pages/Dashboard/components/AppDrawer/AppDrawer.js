@@ -54,12 +54,13 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit
   },
   menuItem: {
-    "&:focus": {
-      backgroundColor: theme.palette.primary.main,
-      "& $menuIcon, & $menuText": {
-        color: "white"
-      }
-    }
+    // >>> Removed this for now because it looks weird/laggy
+    // "&:focus": {
+    //   backgroundColor: theme.palette.primary.main,
+    //   "& $menuIcon, & $menuText": {
+    //     color: "white"
+    //   }
+    // }
   },
   menuIcon: {},
   menuText: {}
@@ -67,12 +68,14 @@ const styles = theme => ({
 
 class AppDrawer extends React.Component {
   render() {
-    // HOC
+    // >>> HOC
     const { classes, theme } = this.props;
-    // Props
+    // >>> Props
     const { isMobileOpen, drawerToggle } = this.props;
-    // Actions
+    // >>> Actions
     const { changeView, logOutUser } = this.props;
+    // >>> Store
+    const { user, currentView } = this.props;
 
     const drawerContents = (
       <Grid
@@ -86,12 +89,12 @@ class AppDrawer extends React.Component {
 
         <div className={classes.infoContainer}>
           <Typography variant="h5" align="center" gutterBottom>
-            Tilda Swinton
+            {user.firstName} {user.lastName}
           </Typography>
 
           <Chip
             icon={<BuildIcon className={classes.chipIcon} fontSize="small" />}
-            label="Administrator"
+            label={user.role}
             color="primary"
           />
         </div>
@@ -103,7 +106,11 @@ class AppDrawer extends React.Component {
             to="/app/my-job-orders"
             onClick={() => changeView(viewEnums.MY_JOB_ORDERS)}
           >
-            <ListItem button className={classes.menuItem}>
+            <ListItem
+              button
+              className={classes.menuItem}
+              selected={currentView === viewEnums.MY_JOB_ORDERS}
+            >
               <ListItemIcon className={classes.menuIcon}>
                 <WorkIcon />
               </ListItemIcon>
@@ -119,7 +126,11 @@ class AppDrawer extends React.Component {
             to="/app/all-job-orders"
             onClick={() => changeView(viewEnums.ALL_JOB_ORDERS)}
           >
-            <ListItem button className={classes.menuItem}>
+            <ListItem
+              button
+              className={classes.menuItem}
+              selected={currentView === viewEnums.ALL_JOB_ORDERS}
+            >
               <ListItemIcon className={classes.menuIcon}>
                 <GroupIcon />
               </ListItemIcon>
@@ -139,7 +150,11 @@ class AppDrawer extends React.Component {
             to="/app/manage-users"
             onClick={() => changeView(viewEnums.MANAGE_USERS)}
           >
-            <ListItem button className={classes.menuItem}>
+            <ListItem
+              button
+              className={classes.menuItem}
+              selected={currentView === viewEnums.MANAGE_USERS}
+            >
               <ListItemIcon className={classes.menuIcon}>
                 <AccountCircleIcon />
               </ListItemIcon>
@@ -168,7 +183,7 @@ class AppDrawer extends React.Component {
 
     return (
       <Fragment>
-        {/* Drawer for mobile */}
+        {/* >>> Drawer for mobile */}
         <Hidden mdUp>
           <Drawer
             container={this.props.container}
@@ -182,7 +197,7 @@ class AppDrawer extends React.Component {
           </Drawer>
         </Hidden>
 
-        {/* Drawer for desktop */}
+        {/* >>> Drawer for desktop */}
         <Hidden smDown implementation="css">
           <Drawer
             classes={{
@@ -199,7 +214,10 @@ class AppDrawer extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  currentView: state.app.currentView,
+  user: state.auth.user
+});
 
 const mapDispatchToProps = {
   changeView,

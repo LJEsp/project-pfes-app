@@ -13,7 +13,7 @@ const UserSchema = new Schema({
     required: true,
     unique: true
   },
-  userType: requiredString,
+  role: requiredString,
   firstName: requiredString,
   lastName: requiredString,
   middleName: {
