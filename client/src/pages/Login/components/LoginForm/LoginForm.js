@@ -86,6 +86,7 @@ class LoginForm extends Component {
           <Button
             variant="contained"
             color="primary"
+            type="submit"
             onClick={this.handleLogIn()}
           >
             Log in
