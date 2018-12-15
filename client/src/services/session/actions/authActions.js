@@ -44,7 +44,7 @@ export const logOutUser = () => dispatch => {
   setAuthToken(false);
 
   // Set current user to {} which will set isAuthenticated to false
-  dispatch(setCurrentUser({}));
+  dispatch(setCurrentUser({ role: roleEnums.UNAUTHORIZED }));
 
   window.location.href = "/";
 

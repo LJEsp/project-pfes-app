@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+
 import { withStyles } from "@material-ui/core/styles";
 import { BrowserRouter as Switch, Route, Router } from "react-router-dom";
 
@@ -6,6 +8,8 @@ import Header from "./components/Header/Header";
 import AppDrawer from "./components/AppDrawer/AppDrawer";
 import JobOrders from "./scenes/JobOrders/JobOrders";
 import ManageUsers from "./scenes/ManageUsers/ManageUsers";
+
+import { viewEnums } from "../../services/enums";
 
 const drawerWidth = 250;
 
@@ -32,6 +36,16 @@ class Dashboard extends Component {
     isCreateDialogOpen: false,
     isCreateUserDialogOpen: false
   };
+
+  componentWillMount() {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push(
+        viewEnums.properties[this.props.currentView].route
+      );
+    } else {
+      this.props.history.push("/");
+    }
+  }
 
   handleDrawerToggle = () => {
     this.setState(state => ({ isMobileOpen: !state.isMobileOpen }));
@@ -94,4 +108,14 @@ class Dashboard extends Component {
   }
 }
 
-export default withStyles(styles)(Dashboard);
+const mapStateToProps = state => ({
+  currentView: state.app.currentView,
+  auth: state.auth
+});
+
+const mapDispatchToProps = {};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(Dashboard));

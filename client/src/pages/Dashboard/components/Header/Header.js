@@ -43,7 +43,7 @@ const styles = theme => ({
 
 class Header extends Component {
   getTitle = () => {
-    return viewEnums.properties[this.props.currentView].name || "";
+    return viewEnums.properties[this.props.currentView].name;
   };
 
   render() {

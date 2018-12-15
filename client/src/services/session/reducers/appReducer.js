@@ -4,7 +4,7 @@ import { APP_VIEW_CHANGE, AUTH_USER_SET } from "../actions/types";
 import { roleEnums } from "../../enums";
 
 const initialState = {
-  currentView: "",
+  currentView: "LOGIN",
   loading: false
 };
 
