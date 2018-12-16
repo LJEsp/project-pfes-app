@@ -31,21 +31,20 @@ const styles = theme => ({
 });
 
 class Dashboard extends Component {
+  constructor(props) {
+    super();
+    if (props.auth.isAuthenticated) {
+      props.history.push(viewEnums.properties[props.currentView].route);
+    } else {
+      props.history.push("/");
+    }
+  }
+
   state = {
     isMobileOpen: false,
     isCreateDialogOpen: false,
     isCreateUserDialogOpen: false
   };
-
-  componentWillMount() {
-    if (this.props.auth.isAuthenticated) {
-      this.props.history.push(
-        viewEnums.properties[this.props.currentView].route
-      );
-    } else {
-      this.props.history.push("/");
-    }
-  }
 
   handleDrawerToggle = () => {
     this.setState(state => ({ isMobileOpen: !state.isMobileOpen }));
