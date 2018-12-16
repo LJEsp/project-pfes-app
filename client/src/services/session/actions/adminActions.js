@@ -9,8 +9,14 @@ export const getAllUsers = () => dispatch => {
       payload: res.data
     });
   });
+
+  console.log("test");
 };
 
 export const createUser = userData => dispatch => {
-  axios.post("/api/users/register", userData).then(res => {});
+  axios.post("/api/users/register", userData).then(res => {
+    console.log(res.data);
+    
+    dispatch(getAllUsers());
+  });
 };

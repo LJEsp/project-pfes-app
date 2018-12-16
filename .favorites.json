@@ -95,5 +95,76 @@
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "XezxFYlRGf0J4ptT"
+    },
+    {
+        "type": "Group",
+        "name": "server",
+        "parent_id": null,
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "EKALRkbfpXM4GeBs",
+        "iconColor": "rgb(0, 255, 0)"
+    },
+    {
+        "type": "File",
+        "name": "c:\\Users\\LJE\\Documents\\GitHub\\_projects\\pfes-app\\project-pfes-app\\server\\server.js",
+        "parent_id": "EKALRkbfpXM4GeBs",
+        "fsPath": "c:\\Users\\LJE\\Documents\\GitHub\\_projects\\pfes-app\\project-pfes-app\\server\\server.js",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "T6pr7y84Dt9zYvFK"
+    },
+    {
+        "type": "Directory",
+        "name": "c:\\Users\\LJE\\Documents\\GitHub\\_projects\\pfes-app\\project-pfes-app\\server\\models",
+        "parent_id": "EKALRkbfpXM4GeBs",
+        "fsPath": "c:\\Users\\LJE\\Documents\\GitHub\\_projects\\pfes-app\\project-pfes-app\\server\\models",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "zL9SFx5wrUoEyK1Z"
+    },
+    {
+        "type": "Directory",
+        "name": "c:\\Users\\LJE\\Documents\\GitHub\\_projects\\pfes-app\\project-pfes-app\\server\\routes\\api",
+        "parent_id": "EKALRkbfpXM4GeBs",
+        "fsPath": "c:\\Users\\LJE\\Documents\\GitHub\\_projects\\pfes-app\\project-pfes-app\\server\\routes\\api",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "NTG3l7kpWCe8vuwc"
+    },
+    {
+        "type": "Directory",
+        "name": "c:\\Users\\LJE\\Documents\\GitHub\\_projects\\pfes-app\\project-pfes-app\\server\\validation",
+        "parent_id": "EKALRkbfpXM4GeBs",
+        "fsPath": "c:\\Users\\LJE\\Documents\\GitHub\\_projects\\pfes-app\\project-pfes-app\\server\\validation",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "5ZGxCucJjzRnvAhk"
+    },
+    {
+        "type": "Group",
+        "name": "dashboard",
+        "parent_id": "iDQMI3ow4VWxzYNP",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "kBUs7Cr9QLxGY3mR"
+    },
+    {
+        "type": "File",
+        "name": "c:\\Users\\LJE\\Documents\\GitHub\\_projects\\pfes-app\\project-pfes-app\\client\\src\\pages\\Dashboard\\scenes\\ManageUsers\\ManageUsers.js",
+        "parent_id": "kBUs7Cr9QLxGY3mR",
+        "fsPath": "c:\\Users\\LJE\\Documents\\GitHub\\_projects\\pfes-app\\project-pfes-app\\client\\src\\pages\\Dashboard\\scenes\\ManageUsers\\ManageUsers.js",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "69NhdCMaHkJTycV7"
+    },
+    {
+        "type": "File",
+        "name": "c:\\Users\\LJE\\Documents\\GitHub\\_projects\\pfes-app\\project-pfes-app\\client\\src\\pages\\Dashboard\\scenes\\JobOrders\\JobOrders.js",
+        "parent_id": "kBUs7Cr9QLxGY3mR",
+        "fsPath": "c:\\Users\\LJE\\Documents\\GitHub\\_projects\\pfes-app\\project-pfes-app\\client\\src\\pages\\Dashboard\\scenes\\JobOrders\\JobOrders.js",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "h5gAPKc2Y3mGXHJS"
     }
 ]

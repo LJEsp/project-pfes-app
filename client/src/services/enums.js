@@ -22,7 +22,7 @@ const roleEnums = {
       name: "Administrator",
       defaultView: viewEnums.MY_JOB_ORDERS
     },
-    SALES: { name: "sales", defaultView: viewEnums.MY_JOB_ORDERS },
+    SALES: { name: "Sales", defaultView: viewEnums.MY_JOB_ORDERS },
     OPERATIONS: { name: "Operations", defaultView: viewEnums.ALL_JOB_ORDERS },
     VIEWER: { name: "Viewer", defaultView: viewEnums.ALL_JOB_ORDERS },
     UNAUTHORIZED: { name: "Unauthorized", defaultView: viewEnums.LOGIN }

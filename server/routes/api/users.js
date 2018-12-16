@@ -4,9 +4,9 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
 const passport = require("passport");
+const { roleEnums } = require("../../utils/enums");
 
 const User = require("../../models/User");
-const { roleEnums } = require("../../utils/enums");
 
 const validateLogin = require("../../validation/validateLogin");
 const validateRegister = require("../../validation/validateRegister");
@@ -86,13 +86,13 @@ router.post("/login", (req, res) => {
 // ////////////////////////////////////
 // @route   POST api/users/register
 // @desc    Register new user
-// @access  Private (admin)
+// @access  Private (ADMINISTRATOR)
 router.post(
   "/register",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     // >>> Only an admin can register a new user
-    if (req.user.role !== "admin") {
+    if (req.user.role !== roleEnums.ADMINISTRATOR) {
       return res.status(401).json({ error: "Unauthorized" });
     }
 
@@ -112,8 +112,8 @@ router.post(
           username: req.body.username,
           role: req.body.role,
           firstName: req.body.firstName,
-          lastName: req.body.lastName,
           middleName: req.body.middleName,
+          lastName: req.body.lastName,
           email: req.body.email,
           contact: req.body.contact,
           password: req.body.password
@@ -128,7 +128,7 @@ router.post(
             newUser
               .save()
               .then(user =>
-                res.status(400).json({ success: "User successfully created." })
+                res.status(200).json({ success: "User successfully created." })
               )
               .catch(err => console.log(err));
           });
