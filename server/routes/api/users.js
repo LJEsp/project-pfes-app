@@ -10,6 +10,7 @@ const User = require("../../models/User");
 
 const validateLogin = require("../../validation/validateLogin");
 const validateRegister = require("../../validation/validateRegister");
+const validateEditUser = require("../../validation/validateEditUser");
 
 // ////////////////////////////////////
 // @route   GET api/users/test
@@ -44,5 +45,17 @@ require("./users/register")({
 // @desc    Get all users
 // @access  Private (admin)
 require("./users/get")({ router, User, passport, roleEnums });
+
+// ////////////////////////////////////
+// @route   PUT api/users/:userId
+// @desc    Edit user
+// @access  Private (ADMINISTRATOR)
+require("./users/edit")({
+  router,
+  passport,
+  roleEnums,
+  User,
+  validateEditUser
+});
 
 module.exports = router;
