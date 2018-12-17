@@ -58,4 +58,10 @@ require("./users/edit")({
   validateEditUser
 });
 
+// ////////////////////////////////////
+// @route   PUT api/users/:userId
+// @desc    Edit user
+// @access  Private (ADMINISTRATOR)
+require("./users/delete")({ router, passport, roleEnums, User });
+
 module.exports = router;
