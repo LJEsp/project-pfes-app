@@ -17,7 +17,7 @@ const validateEditUser = require("../../validation/validateEditUser");
 // @desc    Test users route
 // @access  Public
 router.get("/test", (req, res) =>
-  res.status(200).json({ msg: "Route Users works" })
+  res.status(200).json({ message: "Users route works" })
 );
 
 // ////////////////////////////////////
@@ -59,8 +59,8 @@ require("./users/edit")({
 });
 
 // ////////////////////////////////////
-// @route   PUT api/users/:userId
-// @desc    Edit user
+// @route   DELETE api/users/:userId
+// @desc    Delete user
 // @access  Private (ADMINISTRATOR)
 require("./users/delete")({ router, passport, roleEnums, User });
 

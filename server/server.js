@@ -10,6 +10,7 @@ const path = require("path");
 // ////////////////////////////////////
 // IMPORT ROUTES
 const users = require("./routes/api/users");
+const jo = require("./routes/api/jo");
 
 const app = express();
 
@@ -31,6 +32,7 @@ require("./config/passport")(passport);
 
 // Use routes
 app.use("/api/users", users);
+app.use("/api/jo", jo);
 
 // Serve static assets folder if in production
 if (process.env.NODE_ENV === "production") {

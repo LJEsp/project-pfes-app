@@ -6,15 +6,7 @@ autoIncrement.initialize(mongoose.connection);
 
 const locationObject = isRequired => {
   return {
-    provinceName: {
-      type: String,
-      required: isRequired
-    },
-    provinceKey: {
-      type: String,
-      required: isRequired
-    },
-    city: {
+    country: {
       type: String,
       required: isRequired
     },
@@ -25,7 +17,7 @@ const locationObject = isRequired => {
   };
 };
 
-const requiredString = {
+const requiredStrings = {
   type: String,
   required: true
 };
@@ -76,10 +68,10 @@ const operationObject = {
   ]
 };
 
-const DomesticLogSchema = new Schema({
-  shipperConsignee: requiredString,
-  associate: requiredString,
-  modeOfTransport: requiredString,
+const InternationalJoSchema = new Schema({
+  shipperConsignee: requiredStrings,
+  associate: requiredStrings,
+  modeOfTransport: requiredStrings,
   commodity: {
     type: {
       type: String
@@ -145,19 +137,19 @@ const DomesticLogSchema = new Schema({
   },
   type: {
     type: String,
-    default: "Domestic",
+    default: "International",
     required: true
   }
 });
 
-DomesticLogSchema.plugin(autoIncrement.plugin, {
-  model: "domesticLogs",
+InternationalJoSchema.plugin(autoIncrement.plugin, {
+  model: "internationalLogs",
   field: "number",
   startAt: 1,
   incrementBy: 1
 });
 
-module.exports = DomesticLog = mongoose.model(
-  "domesticLogs",
-  DomesticLogSchema
+module.exports = InternationalLog = mongoose.model(
+  "internationalLogs",
+  InternationalJoSchema
 );
