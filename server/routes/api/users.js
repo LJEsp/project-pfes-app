@@ -43,7 +43,7 @@ require("./users/register")({
 // ////////////////////////////////////
 // @route   GET api/users/all
 // @desc    Get all users
-// @access  Private (admin)
+// @access  Private (ADMINISTRATOR)
 require("./users/get")({ router, User, passport, roleEnums });
 
 // ////////////////////////////////////

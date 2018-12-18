@@ -12,11 +12,17 @@ export class ManageUsers extends Component {
   }
 
   render() {
-    const { isCreateUserDialogOpen, createUserDialogToggle } = this.props;
+    const {
+      isCreateUserDialogOpen,
+      createUserDialogToggle,
+      usersIsLoading
+    } = this.props;
+
+    console.log(usersIsLoading);
 
     return (
       <Fragment>
-        <ManageUsersTable />
+        {usersIsLoading ? <span>Loading</span> : <ManageUsersTable />}
 
         <CreateUserDialog
           isCreateUserDialogOpen={isCreateUserDialogOpen}
@@ -27,7 +33,9 @@ export class ManageUsers extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  usersIsLoading: state.admin.users.isLoading
+});
 
 const mapDispatchToProps = {
   getAllUsers
