@@ -26,10 +26,10 @@ const columns = [
 
 export class ManageUsersTable extends Component {
   render() {
-    const { users } = this.props;
+    const { usersList } = this.props;
 
-    // >>> Convert users object to array that MuiDataTable can use
-    const data = users.map(user => [
+    // >>> Convert usersList object to array that MuiDataTable can use
+    const data = usersList.map(user => [
       user.username,
       user.role,
       user.firstName,
@@ -42,16 +42,29 @@ export class ManageUsersTable extends Component {
       user.dateAdded
     ]);
 
+    const options = {
+      filterType: "multicheck",
+
+      responsive: "scroll",
+      print: false,
+      selectableRows: false
+    };
+
     return (
       <Paper>
-        <MuiDataTable title={"Users"} columns={columns} data={data} />
+        <MuiDataTable
+          title={"Users"}
+          columns={columns}
+          data={data}
+          options={options}
+        />
       </Paper>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  users: state.admin.users
+  usersList: state.admin.users.list
 });
 
 const mapDispatchToProps = {};
