@@ -28,7 +28,7 @@ module.exports = ({
       User.findOne({ username: req.body.username }).then(user => {
         // >>> Check to see if the username already exists in the database
         if (user) {
-          return res.status(400).json({ error: "Username already exists" });
+          return res.status(400).json({ username: "Username already exists" });
         } else {
           // >>> Create new user
           const newUser = new User({

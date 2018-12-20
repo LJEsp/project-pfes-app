@@ -10,6 +10,7 @@ import {
   FormControl,
   FormLabel,
   FormControlLabel,
+  FormHelperText,
   RadioGroup,
   Radio,
   Divider,
@@ -35,17 +36,23 @@ const styles = theme => ({
 });
 
 export class CreateUserDialog extends Component {
-  state = {
-    username: "",
-    role: "",
-    firstName: "",
-    middleName: "",
-    lastName: "",
-    email: "",
-    contact: "",
-    password: "",
-    password2: ""
-  };
+  constructor(props) {
+    super(props);
+
+    this.initialState = {
+      username: "",
+      role: "",
+      firstName: "",
+      middleName: "",
+      lastName: "",
+      email: "",
+      contact: "",
+      password: "",
+      password2: ""
+    };
+
+    this.state = this.initialState;
+  }
 
   handleInputChange = () => e => {
     e.preventDefault();
@@ -54,20 +61,32 @@ export class CreateUserDialog extends Component {
   };
 
   handleSubmit = () => {
-    this.props.createUser(this.state);
+    this.props
+      .createUser(this.state)
+      .then(user => {
+        this.setState(this.initialState, () => {
+          this.props.toggleCreateUserDialog();
+        });
+      })
+      .catch(err => {});
   };
 
   render() {
+    // >>> HOC
+    const { classes } = this.props;
+
+    // >>> Parent
+    const { isCreateUserDialogOpen, toggleCreateUserDialog } = this.props;
+
+    // >>> Redux
     const {
-      classes,
-      isCreateUserDialogOpen,
-      createUserDialogToggle
+      user: { errors, isLoading }
     } = this.props;
 
     return (
       <Dialog
         open={isCreateUserDialogOpen}
-        onClose={createUserDialogToggle}
+        onClose={toggleCreateUserDialog}
         aria-labelledby="create-dialog"
         maxWidth="sm"
         fullWidth
@@ -81,7 +100,13 @@ export class CreateUserDialog extends Component {
 
         <DialogContent>
           <form className={classes.form} autoComplete="off">
-            <FormControl component="fieldset" fullWidth>
+            <FormControl
+              required
+              component="fieldset"
+              fullWidth
+              error={errors.role ? true : false}
+              disabled={isLoading}
+            >
               <FormLabel component="legend">User Role</FormLabel>
 
               <RadioGroup
@@ -90,31 +115,36 @@ export class CreateUserDialog extends Component {
                 value={this.state.role}
                 onChange={this.handleInputChange()}
                 row
+                disabled={isLoading}
               >
                 <FormControlLabel
-                  label="Administrator"
+                  label={roleEnums.properties.ADMINISTRATOR.name}
                   value={roleEnums.ADMINISTRATOR}
                   control={<Radio color="primary" />}
                 />
 
                 <FormControlLabel
-                  label="Sales"
+                  label={roleEnums.properties.SALES.name}
                   value={roleEnums.SALES}
                   control={<Radio color="primary" />}
                 />
 
                 <FormControlLabel
-                  label="Operations"
+                  label={roleEnums.properties.OPERATIONS.name}
                   value={roleEnums.OPERATIONS}
                   control={<Radio color="primary" />}
                 />
 
                 <FormControlLabel
-                  label="Viewer"
+                  label={roleEnums.properties.VIEWER.name}
                   value={roleEnums.VIEWER}
                   control={<Radio color="primary" />}
                 />
               </RadioGroup>
+
+              {errors.role ? (
+                <FormHelperText>{errors.role}</FormHelperText>
+              ) : null}
             </FormControl>
 
             <Grid container className={classes.textInputs}>
@@ -126,6 +156,9 @@ export class CreateUserDialog extends Component {
                   name="username"
                   value={this.state.username}
                   onChange={this.handleInputChange()}
+                  disabled={isLoading}
+                  error={errors.username ? true : false}
+                  helperText={errors.username}
                 />
               </Grid>
 
@@ -138,6 +171,9 @@ export class CreateUserDialog extends Component {
                     name="firstName"
                     value={this.state.firstName}
                     onChange={this.handleInputChange()}
+                    disabled={isLoading}
+                    error={errors.firstName ? true : false}
+                    helperText={errors.firstName}
                   />
                 </Grid>
 
@@ -149,6 +185,9 @@ export class CreateUserDialog extends Component {
                     name="middleName"
                     value={this.state.middleName}
                     onChange={this.handleInputChange()}
+                    disabled={isLoading}
+                    error={errors.middleName ? true : false}
+                    helperText={errors.middleName}
                   />
                 </Grid>
 
@@ -160,6 +199,9 @@ export class CreateUserDialog extends Component {
                     name="lastName"
                     value={this.state.lastName}
                     onChange={this.handleInputChange()}
+                    disabled={isLoading}
+                    error={errors.lastName ? true : false}
+                    helperText={errors.lastName}
                   />
                 </Grid>
               </Grid>
@@ -173,6 +215,9 @@ export class CreateUserDialog extends Component {
                     name="email"
                     value={this.state.email}
                     onChange={this.handleInputChange()}
+                    disabled={isLoading}
+                    error={errors.email ? true : false}
+                    helperText={errors.email}
                   />
                 </Grid>
 
@@ -184,6 +229,9 @@ export class CreateUserDialog extends Component {
                     name="contact"
                     value={this.state.contact}
                     onChange={this.handleInputChange()}
+                    disabled={isLoading}
+                    error={errors.contact ? true : false}
+                    helperText={errors.contact}
                   />
                 </Grid>
               </Grid>
@@ -198,6 +246,9 @@ export class CreateUserDialog extends Component {
                     name="password"
                     value={this.state.password}
                     onChange={this.handleInputChange()}
+                    disabled={isLoading}
+                    error={errors.password ? true : false}
+                    helperText={errors.password}
                   />
                 </Grid>
 
@@ -210,6 +261,9 @@ export class CreateUserDialog extends Component {
                     name="password2"
                     value={this.state.password2}
                     onChange={this.handleInputChange()}
+                    disabled={isLoading}
+                    error={errors.password2 ? true : false}
+                    helperText={errors.password2}
                   />
                 </Grid>
               </Grid>
@@ -220,7 +274,8 @@ export class CreateUserDialog extends Component {
             <Button
               variant="outlined"
               color="inherit"
-              onClick={createUserDialogToggle}
+              onClick={toggleCreateUserDialog}
+              disabled={isLoading}
             >
               Cancel
             </Button>
@@ -230,6 +285,7 @@ export class CreateUserDialog extends Component {
               variant="contained"
               color="primary"
               onClick={() => this.handleSubmit()}
+              disabled={isLoading}
             >
               Create User
             </Button>
@@ -240,7 +296,9 @@ export class CreateUserDialog extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  user: state.admin.user
+});
 
 const mapDispatchToProps = { createUser };
 

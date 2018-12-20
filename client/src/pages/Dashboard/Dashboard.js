@@ -9,6 +9,8 @@ import AppDrawer from "./components/AppDrawer/AppDrawer";
 import JobOrders from "./scenes/JobOrders/JobOrders";
 import ManageUsers from "./scenes/ManageUsers/ManageUsers";
 
+import { clearUserErrors } from "services/session/actions/adminActions";
+
 import { viewEnums } from "../../services/enums";
 
 const drawerWidth = 230;
@@ -25,7 +27,7 @@ const styles = theme => ({
   },
   mainSection: {
     width: "100%",
-    marginTop: 64,
+    marginTop: 69,
     padding: theme.spacing.unit
   }
 });
@@ -54,10 +56,12 @@ class Dashboard extends Component {
     this.setState(state => ({ isCreateDialogOpen: !state.isCreateDialogOpen }));
   };
 
-  handleCreateUserDialogToggle = () => {
+  handleToggleCreateUserDialog = () => {
     this.setState(state => ({
       isCreateUserDialogOpen: !state.isCreateUserDialogOpen
     }));
+
+    this.props.clearUserErrors();
   };
 
   render() {
@@ -76,7 +80,7 @@ class Dashboard extends Component {
         <Header
           drawerToggle={this.handleDrawerToggle}
           createDialogToggle={this.handleCreateDialogToggle}
-          createUserDialogToggle={this.handleCreateUserDialogToggle}
+          toggleCreateUserDialog={this.handleToggleCreateUserDialog}
           location={location}
         />
 
@@ -98,7 +102,7 @@ class Dashboard extends Component {
               <ManageUsers
                 {...props}
                 isCreateUserDialogOpen={isCreateUserDialogOpen}
-                createUserDialogToggle={this.handleCreateUserDialogToggle}
+                toggleCreateUserDialog={this.handleToggleCreateUserDialog}
               />
             )}
           />
@@ -113,7 +117,9 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  clearUserErrors
+};
 
 export default connect(
   mapStateToProps,

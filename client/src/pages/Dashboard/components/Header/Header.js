@@ -23,6 +23,7 @@ const drawerWidth = 230;
 const styles = theme => ({
   appBar: {
     marginLeft: drawerWidth,
+    paddingTop: "4px",
     [theme.breakpoints.up("md")]: {
       width: `calc(100% - ${drawerWidth}px)`
     }
@@ -43,6 +44,7 @@ const styles = theme => ({
   },
   progressBar: {
     position: "absolute",
+    top: "0",
     width: "100%"
   }
 });
@@ -60,7 +62,7 @@ class Header extends Component {
     const {
       drawerToggle,
       createDialogToggle,
-      createUserDialogToggle
+      toggleCreateUserDialog
     } = this.props;
 
     // >>> Store
@@ -108,7 +110,7 @@ class Header extends Component {
                     className={classes.actionButton}
                     variant="extended"
                     size="large"
-                    onClick={this.props.createUserDialogToggle}
+                    onClick={this.props.toggleCreateUserDialog}
                   >
                     <AddCircleIcon className={classes.actionIcon} /> Create User
                   </Fab>

@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { LinearProgress } from "@material-ui/core";
+// >>> This is a relative import. I enabled absolute imports to make importing easier.
 // import { getAllUsers } from "../../../../services/session/actions/adminActions";
 import { getAllUsers } from "services/session/actions/adminActions";
 
@@ -13,7 +14,7 @@ export class ManageUsers extends Component {
   }
 
   render() {
-    const { isCreateUserDialogOpen, createUserDialogToggle } = this.props;
+    const { isCreateUserDialogOpen, toggleCreateUserDialog } = this.props;
 
     return (
       <Fragment>
@@ -21,7 +22,7 @@ export class ManageUsers extends Component {
 
         <CreateUserDialog
           isCreateUserDialogOpen={isCreateUserDialogOpen}
-          createUserDialogToggle={createUserDialogToggle}
+          toggleCreateUserDialog={toggleCreateUserDialog}
         />
       </Fragment>
     );
