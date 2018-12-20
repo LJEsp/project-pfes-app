@@ -1,9 +1,13 @@
 import React, { Component, Fragment } from "react";
 import isEmpty from "lodash.isempty";
-import { Paper, Typography, TextField, Button } from "@material-ui/core";
+import {
+  Paper,
+  Typography,
+  TextField,
+  Button,
+  CircularProgress
+} from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
-
-import { LoadingSpinner } from "components";
 
 import { connect } from "react-redux";
 import { logInUser } from "../../../../services/session/actions/authActions";
@@ -75,6 +79,7 @@ class LoginForm extends Component {
             value={this.state.username}
             onChange={this.handleInputChange()}
             error={!isEmpty(errors)}
+            disabled={isLoading}
           />
 
           <TextField
@@ -89,15 +94,17 @@ class LoginForm extends Component {
             onChange={this.handleInputChange()}
             error={!isEmpty(errors)}
             helperText={!isEmpty(errors) ? errors.login : null}
+            disabled={isLoading}
           />
 
           <Button
             variant="contained"
             color="primary"
             type="submit"
+            disabled={isLoading}
             onClick={this.handleLogIn()}
           >
-            {isLoading ? <LoadingSpinner /> : "Log In"}
+            {isLoading ? <CircularProgress size={20} /> : "Log In"}
           </Button>
         </form>
       </Fragment>
