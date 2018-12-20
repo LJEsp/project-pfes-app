@@ -25,7 +25,7 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { connect } from "react-redux";
 import { changeView } from "../../../../services/session/actions/appActions";
 import { logOutUser } from "../../../../services/session/actions/authActions";
-import { viewEnums } from "../../../../services/enums";
+import { viewEnums, roleEnums } from "../../../../services/enums";
 
 const drawerWidth = 230;
 
@@ -94,7 +94,7 @@ class AppDrawer extends React.Component {
 
           <Chip
             icon={<BuildIcon className={classes.chipIcon} fontSize="small" />}
-            label={user.role}
+            label={roleEnums.properties[user.role].name}
             color="primary"
           />
         </div>

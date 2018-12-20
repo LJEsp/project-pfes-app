@@ -97,7 +97,7 @@ class Header extends Component {
                     className={classes.actionButton}
                     variant="extended"
                     size="large"
-                    onClick={this.props.createDialogToggle}
+                    onClick={createDialogToggle}
                   >
                     <AddCircleIcon className={classes.actionIcon} /> Create Job
                     Order
@@ -110,7 +110,7 @@ class Header extends Component {
                     className={classes.actionButton}
                     variant="extended"
                     size="large"
-                    onClick={this.props.toggleCreateUserDialog}
+                    onClick={toggleCreateUserDialog}
                   >
                     <AddCircleIcon className={classes.actionIcon} /> Create User
                   </Fab>

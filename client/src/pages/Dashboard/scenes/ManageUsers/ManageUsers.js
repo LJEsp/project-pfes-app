@@ -21,6 +21,7 @@ export class ManageUsers extends Component {
         <ManageUsersTable />
 
         <CreateUserDialog
+          key={isCreateUserDialogOpen}
           isCreateUserDialogOpen={isCreateUserDialogOpen}
           toggleCreateUserDialog={toggleCreateUserDialog}
         />

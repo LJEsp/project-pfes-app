@@ -14,9 +14,9 @@ import MuiDataTable from "mui-datatables";
 const columns = [
   "Username",
   "Role",
-  "Firstname",
-  "Lastname",
-  "Middlename",
+  "First Name",
+  "Last Name",
+  "Middle Name",
   "Email",
   "Contact",
   "Status",
@@ -53,7 +53,7 @@ export class ManageUsersTable extends Component {
     return (
       <Paper>
         <MuiDataTable
-          title={"Users"}
+          title={`Users (${data.length})`}
           columns={columns}
           data={data}
           options={options}
