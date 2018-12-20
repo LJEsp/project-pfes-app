@@ -10,7 +10,8 @@ import {
   InputLabel,
   Select,
   MenuItem,
-  Fab
+  Fab,
+  LinearProgress
 } from "@material-ui/core";
 import { Menu } from "@material-ui/icons";
 import { withStyles } from "@material-ui/core/styles";
@@ -39,6 +40,10 @@ const styles = theme => ({
   },
   actionIcon: {
     marginRight: theme.spacing.unit
+  },
+  progressBar: {
+    position: "absolute",
+    width: "100%"
   }
 });
 
@@ -50,17 +55,23 @@ class Header extends Component {
   render() {
     // >>> HOC
     const { classes } = this.props;
+
     // >>> Parent
     const {
       drawerToggle,
       createDialogToggle,
       createUserDialogToggle
     } = this.props;
+
     // >>> Store
-    const { currentView } = this.props;
+    const { currentView, user, users } = this.props;
 
     return (
       <AppBar position="fixed" className={classes.appBar}>
+        <div className={classes.progressBar}>
+          {users.isLoading ? <LinearProgress color="secondary" /> : null}
+        </div>
+
         <Toolbar>
           <IconButton
             color="inherit"
@@ -112,7 +123,8 @@ class Header extends Component {
 
 const mapStateToProps = state => ({
   user: state.auth.user,
-  currentView: state.app.currentView
+  currentView: state.app.currentView,
+  users: state.admin.users
 });
 
 const mapDispatchToProps = {};

@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
+import { LinearProgress } from "@material-ui/core";
 // import { getAllUsers } from "../../../../services/session/actions/adminActions";
 import { getAllUsers } from "services/session/actions/adminActions";
 
@@ -12,17 +13,11 @@ export class ManageUsers extends Component {
   }
 
   render() {
-    const {
-      isCreateUserDialogOpen,
-      createUserDialogToggle,
-      usersIsLoading
-    } = this.props;
-
-    console.log(usersIsLoading);
+    const { isCreateUserDialogOpen, createUserDialogToggle } = this.props;
 
     return (
       <Fragment>
-        {usersIsLoading ? <span>Loading</span> : <ManageUsersTable />}
+        <ManageUsersTable />
 
         <CreateUserDialog
           isCreateUserDialogOpen={isCreateUserDialogOpen}
@@ -33,9 +28,7 @@ export class ManageUsers extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  usersIsLoading: state.admin.users.isLoading
-});
+const mapStateToProps = state => ({});
 
 const mapDispatchToProps = {
   getAllUsers
