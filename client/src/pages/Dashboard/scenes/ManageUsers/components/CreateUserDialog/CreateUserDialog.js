@@ -16,7 +16,7 @@ import {
   Divider,
   TextField,
   Grid,
-  MenuItem,
+  CircularProgress,
   Typography
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
@@ -32,6 +32,16 @@ const styles = theme => ({
   },
   textInputs: {
     marginTop: "-8px"
+  },
+  createUserButton: {
+    position: "relative"
+  },
+  createUserButtonProgress: {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    marginTop: -12,
+    marginLeft: -12
   }
 });
 
@@ -280,15 +290,24 @@ export class CreateUserDialog extends Component {
               Cancel
             </Button>
 
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              onClick={() => this.handleSubmit()}
-              disabled={isLoading}
-            >
-              Create User
-            </Button>
+            <div className={classes.createUserButton}>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                onClick={() => this.handleSubmit()}
+                disabled={isLoading}
+              >
+                Create User
+              </Button>
+
+              {isLoading ? (
+                <CircularProgress
+                  size={24}
+                  className={classes.createUserButtonProgress}
+                />
+              ) : null}
+            </div>
           </DialogActions>
         </DialogContent>
       </Dialog>
