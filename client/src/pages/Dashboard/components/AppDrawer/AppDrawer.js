@@ -27,7 +27,7 @@ import { changeView } from "../../../../services/session/actions/appActions";
 import { logOutUser } from "../../../../services/session/actions/authActions";
 import { viewEnums } from "../../../../services/enums";
 
-const drawerWidth = 250;
+const drawerWidth = 230;
 
 const styles = theme => ({
   drawerPaper: {

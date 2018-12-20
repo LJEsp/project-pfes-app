@@ -17,7 +17,7 @@ import { withStyles } from "@material-ui/core/styles";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import { viewEnums } from "../../../../services/enums";
 
-const drawerWidth = 250;
+const drawerWidth = 230;
 
 const styles = theme => ({
   appBar: {

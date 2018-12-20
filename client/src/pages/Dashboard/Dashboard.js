@@ -11,7 +11,7 @@ import ManageUsers from "./scenes/ManageUsers/ManageUsers";
 
 import { viewEnums } from "../../services/enums";
 
-const drawerWidth = 250;
+const drawerWidth = 230;
 
 const styles = theme => ({
   root: {

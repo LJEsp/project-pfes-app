@@ -3,6 +3,8 @@ import React, { Component, Fragment } from "react";
 import { Paper, Typography, TextField, Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 
+import { LoadingSpinner } from "components";
+
 import { connect } from "react-redux";
 import { logInUser } from "../../../../services/session/actions/authActions";
 
@@ -89,7 +91,7 @@ class LoginForm extends Component {
             type="submit"
             onClick={this.handleLogIn()}
           >
-            Log in
+            <LoadingSpinner />
           </Button>
         </form>
       </Fragment>
