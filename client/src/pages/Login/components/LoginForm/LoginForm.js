@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-
+import isEmpty from "lodash.isempty";
 import { Paper, Typography, TextField, Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 
@@ -48,7 +48,10 @@ class LoginForm extends Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const {
+      classes,
+      auth: { isLoading, user, errors }
+    } = this.props;
 
     return (
       <Fragment>
@@ -71,18 +74,21 @@ class LoginForm extends Component {
             name="username"
             value={this.state.username}
             onChange={this.handleInputChange()}
+            error={!isEmpty(errors)}
           />
 
           <TextField
-            className={classes.passwordField}
             label="Password"
             type="password"
             fullWidth
             margin="normal"
             variant="outlined"
             name="password"
+            className={classes.passwordField}
             value={this.state.password}
             onChange={this.handleInputChange()}
+            error={!isEmpty(errors)}
+            helperText={!isEmpty(errors) ? errors.login : null}
           />
 
           <Button
@@ -91,7 +97,7 @@ class LoginForm extends Component {
             type="submit"
             onClick={this.handleLogIn()}
           >
-            <LoadingSpinner />
+            {isLoading ? <LoadingSpinner /> : "Log In"}
           </Button>
         </form>
       </Fragment>
@@ -99,7 +105,9 @@ class LoginForm extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  auth: state.auth
+});
 
 const mapDispatchToProps = {
   logInUser

@@ -18,7 +18,7 @@ module.exports = ({ router, validateLogin, User, bcrypt, jwt, keys }) => {
       .then(user => {
         // >>> Check if user exists
         if (!user) {
-          errors.username = "User not found";
+          errors.login = "Incorrect login information";
           return res.status(404).json(errors);
         }
 
@@ -52,7 +52,7 @@ module.exports = ({ router, validateLogin, User, bcrypt, jwt, keys }) => {
               }
             );
           } else {
-            errors.credentials = "Incorrect login information";
+            errors.login = "Incorrect login information";
             return res.status(400).json(errors);
           }
         });
