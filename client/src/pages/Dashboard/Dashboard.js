@@ -28,7 +28,10 @@ const styles = theme => ({
   mainSection: {
     width: "100%",
     marginTop: 69,
-    padding: theme.spacing.unit
+    padding: theme.spacing.unit,
+    [theme.breakpoints.up("md")]: {
+      width: "calc(100% - 230px)"
+    }
   }
 });
 
