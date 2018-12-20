@@ -44,7 +44,13 @@ require("./users/register")({
 // @route   GET api/users/all
 // @desc    Get all users
 // @access  Private (ADMINISTRATOR)
-require("./users/get")({ router, User, passport, roleEnums });
+require("./users/getAll")({ router, User, passport, roleEnums });
+
+// ////////////////////////////////////
+// @route   GET api/users/:userId
+// @desc    Get user using id
+// @access  Private (ADMINISTRATOR)
+require("./users/getOne")({ router, User, passport, roleEnums });
 
 // ////////////////////////////////////
 // @route   PUT api/users/:userId
