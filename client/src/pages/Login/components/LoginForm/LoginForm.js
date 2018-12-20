@@ -21,12 +21,24 @@ const styles = theme => ({
     paddingTop: theme.spacing.unit,
     display: "flex",
     flexFlow: "column",
+    width: "100%",
     [theme.breakpoints.down("sm")]: {
       padding: 0
     }
   },
   passwordField: {
     marginBottom: theme.spacing.unit * 2
+  },
+  loginButton: {
+    position: "relative",
+    width: "100%"
+  },
+  loginButtonProgress: {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    marginTop: -12,
+    marginLeft: -12
   }
 });
 
@@ -97,15 +109,25 @@ class LoginForm extends Component {
             disabled={isLoading}
           />
 
-          <Button
-            variant="contained"
-            color="primary"
-            type="submit"
-            disabled={isLoading}
-            onClick={this.handleLogIn()}
-          >
-            {isLoading ? <CircularProgress size={20} /> : "Log In"}
-          </Button>
+          <div className={classes.loginButton}>
+            <Button
+              variant="contained"
+              color="primary"
+              type="submit"
+              disabled={isLoading}
+              onClick={this.handleLogIn()}
+              className={classes.loginButton}
+            >
+              Log In
+            </Button>
+
+            {isLoading ? (
+              <CircularProgress
+                size={20}
+                className={classes.loginButtonProgress}
+              />
+            ) : null}
+          </div>
         </form>
       </Fragment>
     );
