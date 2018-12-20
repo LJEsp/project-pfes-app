@@ -1,64 +1,102 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import moment from "moment";
 
-import {
-  Paper,
-  Table,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody
-} from "@material-ui/core";
-import MuiDataTable from "mui-datatables";
+import MaterialTable from "material-table";
 
 const columns = [
-  "Username",
-  "Role",
-  "First Name",
-  "Last Name",
-  "Middle Name",
-  "Email",
-  "Contact",
-  "Status",
-  "Date Last Logged In",
-  "Date Added"
+  {
+    title: "Username",
+    field: "username",
+    filtering: false
+  },
+  {
+    title: "Role",
+    field: "role",
+    filtering: true
+  },
+  {
+    title: "First Name",
+    field: "firstName",
+    filtering: false
+  },
+  {
+    title: "Middle Name",
+    field: "middleName",
+    filtering: false
+  },
+  {
+    title: "Last Name",
+    field: "lastName",
+    filtering: false
+  },
+  {
+    title: "Email",
+    field: "email",
+    filtering: false
+  },
+  {
+    title: "Contact",
+    field: "contact",
+    filtering: false
+  },
+  {
+    title: "Active",
+    field: "isActive",
+    filtering: true
+  },
+  {
+    title: "Last Logged In",
+    field: "dateLastLoggedIn",
+    filtering: false
+  },
+  {
+    title: "Date Added",
+    field: "dateAdded",
+    filtering: false
+  }
 ];
 
 export class ManageUsersTable extends Component {
   render() {
     const { usersList } = this.props;
 
-    // >>> Convert usersList object to array that MuiDataTable can use
-    const data = usersList.map(user => [
-      user.username,
-      user.role,
-      user.firstName,
-      user.lastName,
-      user.middleName,
-      user.email,
-      user.contact,
-      user.isActive ? "Active" : "Inactive",
-      "TODO",
-      user.dateAdded
-    ]);
+    const data = usersList.map(user => ({
+      username: user.username,
+      role: user.role,
+      firstName: user.firstName,
+      middleName: user.middleName,
+      lastName: user.lastName,
+      email: user.email,
+      contact: user.contact,
+      isActive: user.isActive ? "Yes" : "No",
+      dateLastLoggedIn: moment(user.dateAdded).format("MMM DD, YYYY"),
+      dateAdded: moment(user.dateAdded).format("MMM DD, YYYY")
+    }));
 
     const options = {
-      filterType: "multicheck",
-
-      responsive: "scroll",
-      print: false,
-      selectableRows: false
+      columnsButton: true,
+      exportButton: true,
+      pageSize: 10,
+      pageSizeOptions: [10, 20, 50]
     };
 
     return (
-      <Paper>
-        <MuiDataTable
-          title={`Users (${data.length})`}
-          columns={columns}
-          data={data}
-          options={options}
-        />
-      </Paper>
+      // <Paper>
+      //   <MuiDataTable
+      //     title={`Users (${data.length})`}
+      //     columns={columns}
+      //     data={data}
+      //     options={options}
+      //   />
+      // </Paper>
+
+      <MaterialTable
+        title={`Users (${data.length})`}
+        columns={columns}
+        data={data}
+        options={options}
+      />
     );
   }
 }
