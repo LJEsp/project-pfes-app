@@ -29,13 +29,14 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    // >>> APP
+    // >>> APP --> currentView
     case APP_VIEW_CHANGE:
       return {
         ...state,
         currentView: action.payload
       };
 
+    // -->  alert
     case APP_ALERT_CLOSE:
       return {
         ...state,
@@ -45,20 +46,20 @@ export default function(state = initialState, action) {
         }
       };
 
-    // >>> AUTH
+    // >>> AUTH --> currentView
     case AUTH_USER_SET:
       return {
         ...state,
         currentView: roleEnums.properties[action.payload.role].defaultView
       };
 
-    // >>> ADMIN
+    // >>> ADMIN --> alert
     case ADMIN_USER_SUBMIT_SUCCESS:
       return {
         ...state,
         alert: {
           isOpen: true,
-          message: "Success",
+          message: `${action.payload.username} was successfully created.`,
           status: alertStatusEnums.SUCCESS
         }
       };
@@ -68,7 +69,7 @@ export default function(state = initialState, action) {
         ...state,
         alert: {
           isOpen: true,
-          message: "Error",
+          message: "An error occurred.",
           status: alertStatusEnums.ERROR
         }
       };

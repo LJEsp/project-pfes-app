@@ -35,7 +35,8 @@ export const createUser = userData => dispatch => {
         dispatch(getAllUsers());
 
         dispatch({
-          type: ADMIN_USER_SUBMIT_SUCCESS
+          type: ADMIN_USER_SUBMIT_SUCCESS,
+          payload: userData
         });
 
         resolve(userData);
