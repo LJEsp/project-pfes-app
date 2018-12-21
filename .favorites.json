@@ -166,5 +166,23 @@
         "workspaceRoot": null,
         "workspacePath": null,
         "id": "h5gAPKc2Y3mGXHJS"
+    },
+    {
+        "type": "File",
+        "name": "c:\\Users\\LJE\\Documents\\GitHub\\_projects\\pfes-app\\project-pfes-app\\client\\src\\components\\LoadingSpinner\\LoadingSpinner.js",
+        "parent_id": "3atzW0eU7dP1R9pI",
+        "fsPath": "c:\\Users\\LJE\\Documents\\GitHub\\_projects\\pfes-app\\project-pfes-app\\client\\src\\components\\LoadingSpinner\\LoadingSpinner.js",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "mKqrSNeuT8Lpk2XM"
+    },
+    {
+        "type": "File",
+        "name": "c:\\Users\\LJE\\Documents\\GitHub\\_projects\\pfes-app\\project-pfes-app\\client\\src\\components\\Alert\\Alert.js",
+        "parent_id": "3atzW0eU7dP1R9pI",
+        "fsPath": "c:\\Users\\LJE\\Documents\\GitHub\\_projects\\pfes-app\\project-pfes-app\\client\\src\\components\\Alert\\Alert.js",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "7SA5YGfHCbURWK3F"
     }
 ]

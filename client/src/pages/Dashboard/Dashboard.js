@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 import { BrowserRouter as Switch, Route, Router } from "react-router-dom";
 
+import { Alert } from "components";
 import Header from "./components/Header/Header";
 import AppDrawer from "./components/AppDrawer/AppDrawer";
 import JobOrders from "./scenes/JobOrders/JobOrders";
@@ -110,6 +111,8 @@ class Dashboard extends Component {
             )}
           />
         </div>
+
+        <Alert />
       </div>
     );
   }
