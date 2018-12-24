@@ -7,6 +7,7 @@ import { getAllUsers } from "services/session/actions/adminActions";
 
 import ManageUsersTable from "./components/ManageUsersTable/ManageUsersTable";
 import CreateUserDialog from "./components/CreateUserDialog/CreateUserDialog";
+import EditUserDialog from "./components/EditUserDialog/EditUserDialog";
 
 export class ManageUsers extends Component {
   componentDidMount() {
@@ -25,12 +26,18 @@ export class ManageUsers extends Component {
           isCreateUserDialogOpen={isCreateUserDialogOpen}
           toggleCreateUserDialog={toggleCreateUserDialog}
         />
+
+        {this.props.adminUserEdit.isEditUserDialogOpen ? (
+          <EditUserDialog />
+        ) : null}
       </Fragment>
     );
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  adminUserEdit: state.admin.user.edit
+});
 
 const mapDispatchToProps = {
   getAllUsers

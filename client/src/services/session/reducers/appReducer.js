@@ -29,14 +29,15 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    // >>> APP --> currentView
+    // >>> APP
+    // -----> currentView
     case APP_VIEW_CHANGE:
       return {
         ...state,
         currentView: action.payload
       };
 
-    // -->  alert
+    // -----> alert
     case APP_ALERT_CLOSE:
       return {
         ...state,
@@ -46,14 +47,16 @@ export default function(state = initialState, action) {
         }
       };
 
-    // >>> AUTH --> currentView
+    // >>> AUTH
+    // -----> currentView
     case AUTH_USER_SET:
       return {
         ...state,
         currentView: roleEnums.properties[action.payload.role].defaultView
       };
 
-    // >>> ADMIN --> alert
+    // >>> ADMIN
+    // -----> alert
     case ADMIN_USER_SUBMIT_SUCCESS:
       return {
         ...state,

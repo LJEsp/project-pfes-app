@@ -6,7 +6,10 @@ import {
   ADMIN_USER_SUBMIT,
   ADMIN_USER_SUBMIT_ERROR,
   ADMIN_USER_SUBMIT_SUCCESS,
-  ADMIN_USER_ERRORS_CLEAR
+  ADMIN_USER_ERRORS_CLEAR,
+  ADMIN_USER_SELECT,
+  ADMIN_USER_SELECT_SUCCESS,
+  ADMIN_USER_EDIT_CLOSE
 } from "./types";
 
 export const getAllUsers = () => dispatch => {
@@ -36,7 +39,7 @@ export const createUser = userData => dispatch => {
 
         dispatch({
           type: ADMIN_USER_SUBMIT_SUCCESS,
-          payload: userData
+          payload: res.data
         });
 
         resolve(userData);
@@ -49,6 +52,25 @@ export const createUser = userData => dispatch => {
 
         reject(err.response.data);
       });
+  });
+};
+
+export const selectUser = userId => dispatch => {
+  dispatch({
+    type: ADMIN_USER_SELECT
+  });
+
+  axios.get(`/api/users/${userId}`).then(res => {
+    dispatch({
+      type: ADMIN_USER_SELECT_SUCCESS,
+      payload: res.data
+    });
+  });
+};
+
+export const closeEditUserDialog = () => dispatch => {
+  dispatch({
+    type: ADMIN_USER_EDIT_CLOSE
   });
 };
 

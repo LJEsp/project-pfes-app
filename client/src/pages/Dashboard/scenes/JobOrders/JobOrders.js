@@ -15,7 +15,7 @@ export class JobOrders extends Component {
 
     return (
       <Fragment>
-        <JobOrdersTable />
+        {/* <JobOrdersTable /> */}
 
         <CreateDialog
           isCreateDialogOpen={isCreateDialogOpen}

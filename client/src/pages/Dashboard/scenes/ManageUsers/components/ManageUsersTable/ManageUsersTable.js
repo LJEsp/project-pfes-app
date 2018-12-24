@@ -2,64 +2,57 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import moment from "moment";
 
+import { selectUser } from "services/session/actions/adminActions";
+
 import MaterialTable from "material-table";
 
 const columns = [
   {
     title: "Username",
-    field: "username",
-    filtering: false
+    field: "username"
   },
   {
     title: "Role",
-    field: "role",
-    filtering: true
+    field: "role"
   },
   {
     title: "First Name",
-    field: "firstName",
-    filtering: false
+    field: "firstName"
   },
   {
     title: "Middle Name",
-    field: "middleName",
-    filtering: false
+    field: "middleName"
   },
   {
     title: "Last Name",
-    field: "lastName",
-    filtering: false
+    field: "lastName"
   },
   {
     title: "Email",
-    field: "email",
-    filtering: false
+    field: "email"
   },
   {
     title: "Contact",
-    field: "contact",
-    filtering: false
+    field: "contact"
   },
   {
     title: "Active",
-    field: "isActive",
-    filtering: true
+    field: "isActive"
   },
   {
     title: "Last Logged In",
-    field: "dateLastLoggedIn",
-    filtering: false
+    field: "dateLastLoggedIn"
   },
   {
     title: "Date Added",
-    field: "dateAdded",
-    filtering: false
+    field: "dateAdded"
   }
 ];
 
 export class ManageUsersTable extends Component {
   render() {
-    const { usersList } = this.props;
+    // >>> Redux
+    const { usersList, selectUser } = this.props;
 
     const data = usersList.map(user => ({
       username: user.username,
@@ -71,31 +64,35 @@ export class ManageUsersTable extends Component {
       contact: user.contact,
       isActive: user.isActive ? "Yes" : "No",
       dateLastLoggedIn: moment(user.dateAdded).format("MMM DD, YYYY"),
-      dateAdded: moment(user.dateAdded).format("MMM DD, YYYY")
+      dateAdded: moment(user.dateAdded).format("MMM DD, YYYY"),
+      id: user._id
     }));
 
     const options = {
       columnsButton: true,
       exportButton: true,
       pageSize: 10,
-      pageSizeOptions: [10, 20, 50]
+      pageSizeOptions: [10, 20, 50],
+      paging: true
     };
 
-    return (
-      // <Paper>
-      //   <MuiDataTable
-      //     title={`Users (${data.length})`}
-      //     columns={columns}
-      //     data={data}
-      //     options={options}
-      //   />
-      // </Paper>
+    const actions = [
+      {
+        icon: "edit",
+        tooltip: "Edit",
+        onClick: (event, rowData) => {
+          selectUser(rowData.id);
+        }
+      }
+    ];
 
+    return (
       <MaterialTable
         title={`Users (${data.length})`}
         columns={columns}
         data={data}
         options={options}
+        actions={actions}
       />
     );
   }
@@ -105,7 +102,9 @@ const mapStateToProps = state => ({
   usersList: state.admin.users.list
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  selectUser
+};
 
 export default connect(
   mapStateToProps,
