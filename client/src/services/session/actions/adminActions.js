@@ -55,6 +55,14 @@ export const createUser = userData => dispatch => {
   });
 };
 
+// >>> Clear create user errors
+export const clearUserErrors = () => dispatch => {
+  dispatch({
+    type: ADMIN_USER_ERRORS_CLEAR
+  });
+};
+
+// >>> Edit User
 export const selectUser = userId => dispatch => {
   dispatch({
     type: ADMIN_USER_SELECT
@@ -67,15 +75,8 @@ export const selectUser = userId => dispatch => {
     });
   });
 };
-
 export const closeEditUserDialog = () => dispatch => {
   dispatch({
     type: ADMIN_USER_EDIT_CLOSE
-  });
-};
-
-export const clearUserErrors = () => dispatch => {
-  dispatch({
-    type: ADMIN_USER_ERRORS_CLEAR
   });
 };

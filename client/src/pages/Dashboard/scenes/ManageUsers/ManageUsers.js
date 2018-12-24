@@ -27,9 +27,7 @@ export class ManageUsers extends Component {
           toggleCreateUserDialog={toggleCreateUserDialog}
         />
 
-        {this.props.adminUserEdit.isEditUserDialogOpen ? (
-          <EditUserDialog />
-        ) : null}
+        <EditUserDialog />
       </Fragment>
     );
   }

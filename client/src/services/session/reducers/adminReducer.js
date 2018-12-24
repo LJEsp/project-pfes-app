@@ -17,7 +17,17 @@ const initialState = {
   user: {
     edit: {
       isEditUserDialogOpen: false,
-      selected: {},
+      selected: {
+        _id: "",
+        username: "",
+        role: "",
+        firstName: "",
+        middleName: "",
+        lastName: "",
+        email: "",
+        contact: "",
+        isActive: true
+      },
       isLoading: false,
       errors: {}
     },
@@ -115,7 +125,6 @@ export default function(state = initialState, action) {
           ...state.user,
           edit: {
             ...state.user.edit,
-            selected: {},
             isEditUserDialogOpen: false
           }
         }
