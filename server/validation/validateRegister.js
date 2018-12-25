@@ -14,7 +14,7 @@ module.exports = function validateRegister(data) {
   data.password = !_.isEmpty(data.password) ? data.password : "";
   data.password2 = !_.isEmpty(data.password2) ? data.password2 : "";
 
-  // username
+  // >>> username
   if (!Validator.isLength(data.username, { min: 2, max: 30 })) {
     errors.username = "Username must be between 2 to 30 characters.";
   }
@@ -22,12 +22,12 @@ module.exports = function validateRegister(data) {
     errors.username = "Username is required.";
   }
 
-  // role
+  // >>> role
   if (Validator.isEmpty(data.role)) {
     errors.role = "User type is required.";
   }
 
-  // firstName
+  // >>> firstName
   if (!Validator.isLength(data.firstName, { min: 2, max: 30 })) {
     errors.firstName = "First name must be between 2 to 30 characters.";
   }
@@ -35,7 +35,7 @@ module.exports = function validateRegister(data) {
     errors.firstName = "First name is required.";
   }
 
-  // lastName
+  // >>> lastName
   if (!Validator.isLength(data.lastName, { min: 2, max: 30 })) {
     errors.lastName = "Last name must be between 2 to 30 characters.";
   }
@@ -43,15 +43,17 @@ module.exports = function validateRegister(data) {
     errors.lastName = "Last name is required.";
   }
 
-  // middleName
+  // >>> middleName
+  /*
   if (!Validator.isLength(data.middleName, { min: 2, max: 30 })) {
     errors.middleName = "Middle name must be between 2 to 30 characters.";
   }
   if (Validator.isEmpty(data.middleName)) {
     errors.middleName = "Middle name is required.";
   }
+  */
 
-  // email
+  // >>> email
   if (!Validator.isEmail(data.email)) {
     errors.email = "Email is invalid.";
   }
@@ -59,7 +61,7 @@ module.exports = function validateRegister(data) {
     errors.email = "Email is required.";
   }
 
-  // contact
+  // >>> contact
   if (!Validator.isLength(data.contact, { min: 4, max: 15 })) {
     errors.contact = "Contact number must be between 4 to 15 characters.";
   }
@@ -67,7 +69,7 @@ module.exports = function validateRegister(data) {
     errors.contact = "Contact is required.";
   }
 
-  // password
+  // >>> password
   if (!Validator.isLength(data.password, { min: 6 })) {
     errors.password = "Password must be at least 6 characters";
   }
@@ -75,7 +77,7 @@ module.exports = function validateRegister(data) {
     errors.password = "Password is required";
   }
 
-  // password2
+  // >>> password2
   if (Validator.isEmpty(data.password2)) {
     errors.password2 = "Password confirmation is required";
   }

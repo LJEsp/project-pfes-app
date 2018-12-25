@@ -21,7 +21,10 @@ import {
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { roleEnums } from "services/enums";
-import { createUser } from "services/session/actions/adminActions";
+import {
+  createUser,
+  closeCreateUserDialog
+} from "services/session/actions/adminActions";
 
 const styles = theme => ({
   form: {
@@ -75,7 +78,7 @@ export class CreateUserDialog extends Component {
       .createUser(this.state)
       .then(user => {
         this.setState(this.initialState, () => {
-          this.props.toggleCreateUserDialog();
+          this.props.closeCreateUserDialog();
         });
       })
       .catch(err => {});
@@ -86,17 +89,18 @@ export class CreateUserDialog extends Component {
     const { classes } = this.props;
 
     // >>> Parent
-    const { isCreateUserDialogOpen, toggleCreateUserDialog } = this.props;
+    // const { isCreateUserDialogOpen, toggleCreateUserDialog } = this.props;
 
     // >>> Redux
     const {
-      user: { errors, isLoading }
+      createUserAdminState: { errors, isLoading, isCreateUserDialogOpen },
+      closeCreateUserDialog
     } = this.props;
 
     return (
       <Dialog
         open={isCreateUserDialogOpen}
-        onClose={toggleCreateUserDialog}
+        onClose={closeCreateUserDialog}
         aria-labelledby="create-dialog"
         maxWidth="sm"
         fullWidth
@@ -284,7 +288,7 @@ export class CreateUserDialog extends Component {
             <Button
               variant="outlined"
               color="inherit"
-              onClick={toggleCreateUserDialog}
+              onClick={closeCreateUserDialog}
               disabled={isLoading}
             >
               Cancel
@@ -316,10 +320,10 @@ export class CreateUserDialog extends Component {
 }
 
 const mapStateToProps = state => ({
-  user: state.admin.user
+  createUserAdminState: state.admin.user.create
 });
 
-const mapDispatchToProps = { createUser };
+const mapDispatchToProps = { createUser, closeCreateUserDialog };
 
 export default connect(
   mapStateToProps,

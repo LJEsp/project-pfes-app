@@ -1,14 +1,19 @@
 import {
   ADMIN_USERS_GET_ALL,
   ADMIN_USERS_FETCH_ALL,
-  ADMIN_USER_SUBMIT,
-  ADMIN_USER_SUBMIT_ERROR,
-  ADMIN_USER_SUBMIT_SUCCESS,
+  ADMIN_USER_CREATE_OPEN,
+  ADMIN_USER_CREATE_SUBMIT,
+  ADMIN_USER_CREATE_SUBMIT_ERROR,
+  ADMIN_USER_CREATE_SUBMIT_SUCCESS,
   ADMIN_USER_ERRORS_CLEAR,
   ADMIN_USER_SELECT,
   ADMIN_USER_SELECT_SUCCESS,
   ADMIN_USER_SELECT_ERROR,
-  ADMIN_USER_EDIT_CLOSE
+  ADMIN_USER_EDIT_SUBMIT_SUCCESS,
+  ADMIN_USER_EDIT_SUBMIT_ERROR,
+  ADMIN_USER_EDIT_CLOSE,
+  ADMIN_USER_CREATE_CLOSE,
+  ADMIN_USER_EDIT_SUBMIT
 } from "../actions/types";
 
 // users
@@ -31,8 +36,12 @@ const initialState = {
       isLoading: false,
       errors: {}
     },
-    isLoading: false,
-    errors: {}
+    create: {
+      isCreateUserDialogOpen: false,
+      isLoading: false,
+      errors: {}
+    },
+    isLoading: false
   },
   users: {
     isLoading: false,
@@ -63,34 +72,67 @@ export default function(state = initialState, action) {
       };
 
     // -----> user
-    // ----------> submit
-    case ADMIN_USER_SUBMIT:
+    // ----------> create
+    case ADMIN_USER_CREATE_OPEN:
       return {
         ...state,
         user: {
           ...state.user,
-          errors: {},
-          isLoading: true
+          create: {
+            ...state.user.create,
+            isCreateUserDialogOpen: true,
+            errors: {}
+          }
         }
       };
-    case ADMIN_USER_SUBMIT_ERROR:
+    case ADMIN_USER_CREATE_SUBMIT:
       return {
         ...state,
         user: {
           ...state.user,
-          errors: action.payload,
-          isLoading: false
+          create: {
+            ...state.user.create,
+            errors: {},
+            isLoading: true
+          }
         }
       };
-    case ADMIN_USER_SUBMIT_SUCCESS:
+    case ADMIN_USER_CREATE_SUBMIT_ERROR:
       return {
         ...state,
         user: {
           ...state.user,
-          errors: {},
-          isLoading: false
+          create: {
+            ...state.user.create,
+            errors: action.payload,
+            isLoading: false
+          }
         }
       };
+    case ADMIN_USER_CREATE_SUBMIT_SUCCESS:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          create: {
+            isCreateUserDialogOpen: false,
+            errors: {},
+            isLoading: false
+          }
+        }
+      };
+    case ADMIN_USER_CREATE_CLOSE:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          create: {
+            ...state.user.create,
+            isCreateUserDialogOpen: false
+          }
+        }
+      };
+
     // ----------> select
     case ADMIN_USER_SELECT:
       return {
@@ -99,9 +141,9 @@ export default function(state = initialState, action) {
           ...state.user,
           edit: {
             ...state.user.edit,
-            isEditUserDialogOpen: true,
-            isLoading: true
-          }
+            isEditUserDialogOpen: true
+          },
+          isLoading: true
         }
       };
     case ADMIN_USER_SELECT_SUCCESS:
@@ -111,13 +153,53 @@ export default function(state = initialState, action) {
           ...state.user,
           edit: {
             ...state.user.edit,
-            selected: action.payload,
-            isLoading: false
-          }
+            selected: action.payload
+          },
+          isLoading: false
         }
       };
     // case ADMIN_USER_SELECT_ERROR:
     // ----------> edit
+    case ADMIN_USER_EDIT_SUBMIT:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          edit: {
+            ...state.user.edit,
+            errors: {},
+            isLoading: true
+          }
+        }
+      };
+
+    case ADMIN_USER_EDIT_SUBMIT_SUCCESS:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          edit: {
+            ...state.user.edit,
+            isEditUserDialogOpen: false,
+            errors: {},
+            isLoading: false
+          }
+        }
+      };
+
+    case ADMIN_USER_EDIT_SUBMIT_ERROR:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          edit: {
+            ...state.user.edit,
+            errors: action.payload,
+            isLoading: false
+          }
+        }
+      };
+
     case ADMIN_USER_EDIT_CLOSE:
       return {
         ...state,
@@ -125,7 +207,8 @@ export default function(state = initialState, action) {
           ...state.user,
           edit: {
             ...state.user.edit,
-            isEditUserDialogOpen: false
+            isEditUserDialogOpen: false,
+            errors: {}
           }
         }
       };
@@ -136,7 +219,14 @@ export default function(state = initialState, action) {
         ...state,
         user: {
           ...state.user,
-          errors: {}
+          create: {
+            ...state.user.create,
+            errors: {}
+          },
+          edit: {
+            ...state.user.edit,
+            errors: {}
+          }
         }
       };
 

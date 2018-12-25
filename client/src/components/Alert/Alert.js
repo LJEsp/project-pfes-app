@@ -54,7 +54,10 @@ export class Alert extends Component {
     const { classes } = this.props;
 
     // >>> Redux
-    const { appAlert, closeAlert } = this.props;
+    // -----> store
+    const { appAlert,  } = this.props;
+    // -----> actions
+    const { closeAlert } = this.props;
 
     const Icon = variantIcon[appAlert.status];
 

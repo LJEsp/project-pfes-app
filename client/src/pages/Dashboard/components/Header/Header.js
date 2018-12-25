@@ -17,6 +17,7 @@ import { Menu } from "@material-ui/icons";
 import { withStyles } from "@material-ui/core/styles";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import { viewEnums } from "../../../../services/enums";
+import { openCreateUserDialog } from "services/session/actions/adminActions";
 
 const drawerWidth = 230;
 
@@ -59,14 +60,10 @@ class Header extends Component {
     const { classes } = this.props;
 
     // >>> Parent
-    const {
-      drawerToggle,
-      createDialogToggle,
-      toggleCreateUserDialog
-    } = this.props;
+    const { drawerToggle, createDialogToggle } = this.props;
 
-    // >>> Store
-    const { currentView, user, users } = this.props;
+    // >>> Redux
+    const { currentView, user, users, openCreateUserDialog } = this.props;
 
     return (
       <AppBar position="fixed" className={classes.appBar}>
@@ -110,7 +107,7 @@ class Header extends Component {
                     className={classes.actionButton}
                     variant="extended"
                     size="large"
-                    onClick={toggleCreateUserDialog}
+                    onClick={openCreateUserDialog}
                   >
                     <AddCircleIcon className={classes.actionIcon} /> Create User
                   </Fab>
@@ -129,7 +126,7 @@ const mapStateToProps = state => ({
   users: state.admin.users
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = { openCreateUserDialog };
 
 export default connect(
   mapStateToProps,

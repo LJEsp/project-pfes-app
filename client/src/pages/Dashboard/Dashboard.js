@@ -48,29 +48,16 @@ class Dashboard extends Component {
 
   state = {
     isMobileOpen: false,
-    isCreateDialogOpen: false,
-    isCreateUserDialogOpen: false
+    isCreateDialogOpen: false
   };
 
   handleDrawerToggle = () => {
     this.setState(state => ({ isMobileOpen: !state.isMobileOpen }));
   };
 
-  handleCreateDialogToggle = () => {
-    this.setState(state => ({ isCreateDialogOpen: !state.isCreateDialogOpen }));
-  };
-
-  handleToggleCreateUserDialog = () => {
-    this.setState(state => ({
-      isCreateUserDialogOpen: !state.isCreateUserDialogOpen
-    }));
-
-    this.props.clearUserErrors();
-  };
-
   render() {
     const { classes, match, location } = this.props;
-    const { isCreateDialogOpen, isCreateUserDialogOpen } = this.state;
+    const { isCreateDialogOpen } = this.state;
 
     return (
       <div className={classes.root}>
@@ -102,13 +89,7 @@ class Dashboard extends Component {
 
           <Route
             path={`${match.url}/manage-users`}
-            render={props => (
-              <ManageUsers
-                {...props}
-                isCreateUserDialogOpen={isCreateUserDialogOpen}
-                toggleCreateUserDialog={this.handleToggleCreateUserDialog}
-              />
-            )}
+            component={ManageUsers}
           />
         </div>
 

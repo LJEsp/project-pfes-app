@@ -1,10 +1,11 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import moment from "moment";
 
 import { selectUser } from "services/session/actions/adminActions";
 
-import MaterialTable from "material-table";
+import { CircularProgress } from "@material-ui/core";
+import MaterialTable, { MTableBody } from "material-table";
 
 const columns = [
   {
@@ -52,9 +53,9 @@ const columns = [
 export class ManageUsersTable extends Component {
   render() {
     // >>> Redux
-    const { usersList, selectUser } = this.props;
+    const { users, selectUser } = this.props;
 
-    const data = usersList.map(user => ({
+    const data = users.list.map(user => ({
       username: user.username,
       role: user.role,
       firstName: user.firstName,
@@ -86,6 +87,12 @@ export class ManageUsersTable extends Component {
       }
     ];
 
+    // const components = {
+    //   Body: props => {
+    //     return users.isLoading ? "Loading Users" : <MTableBody {...props} />;
+    //   }
+    // };
+
     return (
       <MaterialTable
         title={`Users (${data.length})`}
@@ -93,13 +100,14 @@ export class ManageUsersTable extends Component {
         data={data}
         options={options}
         actions={actions}
+        // components={components}
       />
     );
   }
 }
 
 const mapStateToProps = state => ({
-  usersList: state.admin.users.list
+  users: state.admin.users
 });
 
 const mapDispatchToProps = {

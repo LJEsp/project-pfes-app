@@ -15,17 +15,11 @@ export class ManageUsers extends Component {
   }
 
   render() {
-    const { isCreateUserDialogOpen, toggleCreateUserDialog } = this.props;
-
     return (
       <Fragment>
         <ManageUsersTable />
 
-        <CreateUserDialog
-          key={isCreateUserDialogOpen}
-          isCreateUserDialogOpen={isCreateUserDialogOpen}
-          toggleCreateUserDialog={toggleCreateUserDialog}
-        />
+        <CreateUserDialog />
 
         <EditUserDialog />
       </Fragment>
@@ -33,9 +27,7 @@ export class ManageUsers extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  adminUserEdit: state.admin.user.edit
-});
+const mapStateToProps = state => ({});
 
 const mapDispatchToProps = {
   getAllUsers

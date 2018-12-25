@@ -20,7 +20,10 @@ import {
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { roleEnums } from "services/enums";
-import { closeEditUserDialog } from "services/session/actions/adminActions";
+import {
+  closeEditUserDialog,
+  submitUserEdits
+} from "services/session/actions/adminActions";
 
 const styles = theme => ({
   form: {
@@ -67,17 +70,19 @@ export class EditUserDialog extends Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.adminUserEdit.selected._id !== prevState._id) {
+    if (nextProps.editUserAdminState.selected._id !== prevState._id) {
+      const { selected } = nextProps.editUserAdminState;
+
       return {
-        _id: nextProps.adminUserEdit.selected._id,
-        username: nextProps.adminUserEdit.selected.username,
-        role: nextProps.adminUserEdit.selected.role,
-        firstName: nextProps.adminUserEdit.selected.firstName,
-        middleName: nextProps.adminUserEdit.selected.middleName,
-        lastName: nextProps.adminUserEdit.selected.lastName,
-        email: nextProps.adminUserEdit.selected.email,
-        contact: nextProps.adminUserEdit.selected.contact,
-        isActive: nextProps.adminUserEdit.selected.isActive
+        _id: selected._id,
+        username: selected.username,
+        role: selected.role,
+        firstName: selected.firstName,
+        middleName: selected.middleName,
+        lastName: selected.lastName,
+        email: selected.email,
+        contact: selected.contact,
+        isActive: selected.isActive
       };
     }
     return null;
@@ -89,10 +94,15 @@ export class EditUserDialog extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  handleSubmit = () => e => {
+    this.props.submitUserEdits(this.state);
+  };
+
   render() {
     // >>> Redux
     const {
-      adminUserEdit: { isEditUserDialogOpen, selected, isLoading },
+      editUserAdminState: { isEditUserDialogOpen, selected, isLoading, errors },
+      userAdminState,
       closeEditUserDialog
     } = this.props;
 
@@ -106,7 +116,7 @@ export class EditUserDialog extends Component {
         fullWidth
         scroll="body"
       >
-        {isLoading ? (
+        {userAdminState.isLoading ? (
           <DialogContent className={classes.loading}>
             <CircularProgress />
           </DialogContent>
@@ -124,8 +134,8 @@ export class EditUserDialog extends Component {
                   required
                   component="fieldset"
                   fullWidth
-                  // error={errors.role ? true : false}
-                  // disabled={isLoading}
+                  error={errors.role ? true : false}
+                  disabled={isLoading}
                 >
                   <FormLabel component="legend">User Role</FormLabel>
 
@@ -135,7 +145,7 @@ export class EditUserDialog extends Component {
                     value={this.state.role}
                     onChange={this.handleInputChange()}
                     row
-                    // disabled={isLoading}
+                    disabled={isLoading}
                   >
                     <FormControlLabel
                       label={roleEnums.properties.ADMINISTRATOR.name}
@@ -162,13 +172,13 @@ export class EditUserDialog extends Component {
                     />
                   </RadioGroup>
 
-                  {/* {errors.role ? (
-                  <FormHelperText>{errors.role}</FormHelperText>
-                ) : null} */}
+                  {errors.role ? (
+                    <FormHelperText>{errors.role}</FormHelperText>
+                  ) : null}
                 </FormControl>
 
                 <Grid container className={classes.textInputs}>
-                  <Grid item xs={12}>
+                  {/* <Grid item xs={12}>
                     <TextField
                       label="Username"
                       margin="normal"
@@ -180,7 +190,7 @@ export class EditUserDialog extends Component {
                       // error={errors.username ? true : false}
                       // helperText={errors.username}
                     />
-                  </Grid>
+                  </Grid> */}
 
                   <Grid container item spacing={16}>
                     <Grid item xs={12} sm={4}>
@@ -191,9 +201,9 @@ export class EditUserDialog extends Component {
                         name="firstName"
                         value={this.state.firstName}
                         onChange={this.handleInputChange()}
-                        // disabled={isLoading}
-                        // error={errors.firstName ? true : false}
-                        // helperText={errors.firstName}
+                        disabled={isLoading}
+                        error={errors.firstName ? true : false}
+                        helperText={errors.firstName}
                       />
                     </Grid>
 
@@ -205,9 +215,9 @@ export class EditUserDialog extends Component {
                         name="middleName"
                         value={this.state.middleName}
                         onChange={this.handleInputChange()}
-                        // disabled={isLoading}
-                        // error={errors.middleName ? true : false}
-                        // helperText={errors.middleName}
+                        disabled={isLoading}
+                        error={errors.middleName ? true : false}
+                        helperText={errors.middleName}
                       />
                     </Grid>
 
@@ -219,9 +229,9 @@ export class EditUserDialog extends Component {
                         name="lastName"
                         value={this.state.lastName}
                         onChange={this.handleInputChange()}
-                        // disabled={isLoading}
-                        // error={errors.lastName ? true : false}
-                        // helperText={errors.lastName}
+                        disabled={isLoading}
+                        error={errors.lastName ? true : false}
+                        helperText={errors.lastName}
                       />
                     </Grid>
                   </Grid>
@@ -235,9 +245,9 @@ export class EditUserDialog extends Component {
                         name="email"
                         value={this.state.email}
                         onChange={this.handleInputChange()}
-                        // disabled={isLoading}
-                        // error={errors.email ? true : false}
-                        // helperText={errors.email}
+                        disabled={isLoading}
+                        error={errors.email ? true : false}
+                        helperText={errors.email}
                       />
                     </Grid>
 
@@ -249,9 +259,9 @@ export class EditUserDialog extends Component {
                         name="contact"
                         value={this.state.contact}
                         onChange={this.handleInputChange()}
-                        // disabled={isLoading}
-                        // error={errors.contact ? true : false}
-                        // helperText={errors.contact}
+                        disabled={isLoading}
+                        error={errors.contact ? true : false}
+                        helperText={errors.contact}
                       />
                     </Grid>
                   </Grid>
@@ -263,7 +273,7 @@ export class EditUserDialog extends Component {
                   variant="outlined"
                   color="inherit"
                   onClick={closeEditUserDialog}
-                  // disabled={isLoading}
+                  disabled={isLoading}
                 >
                   Cancel
                 </Button>
@@ -273,8 +283,8 @@ export class EditUserDialog extends Component {
                     type="submit"
                     variant="contained"
                     color="primary"
-                    // onClick={() => this.handleSubmit()}
-                    // disabled={isLoading}
+                    onClick={this.handleSubmit()}
+                    disabled={isLoading}
                   >
                     Edit User
                   </Button>
@@ -296,11 +306,13 @@ export class EditUserDialog extends Component {
 }
 
 const mapStateToProps = state => ({
-  adminUserEdit: state.admin.user.edit
+  userAdminState: state.admin.user,
+  editUserAdminState: state.admin.user.edit
 });
 
 const mapDispatchToProps = {
-  closeEditUserDialog
+  closeEditUserDialog,
+  submitUserEdits
 };
 
 export default connect(

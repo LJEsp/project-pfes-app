@@ -4,8 +4,10 @@ import {
   APP_VIEW_CHANGE,
   AUTH_USER_SET,
   APP_ALERT_CLOSE,
-  ADMIN_USER_SUBMIT_SUCCESS,
-  ADMIN_USER_SUBMIT_ERROR
+  ADMIN_USER_CREATE_SUBMIT_SUCCESS,
+  ADMIN_USER_CREATE_SUBMIT_ERROR,
+  ADMIN_USER_EDIT_SUBMIT_SUCCESS,
+  ADMIN_USER_EDIT_SUBMIT_ERROR
 } from "../actions/types";
 import { roleEnums } from "../../enums";
 
@@ -55,24 +57,45 @@ export default function(state = initialState, action) {
         currentView: roleEnums.properties[action.payload.role].defaultView
       };
 
-    // >>> ADMIN
-    // -----> alert
-    case ADMIN_USER_SUBMIT_SUCCESS:
+    // >>> ADMIN ALERTS
+    // -----> create
+    case ADMIN_USER_CREATE_SUBMIT_SUCCESS:
       return {
         ...state,
         alert: {
           isOpen: true,
-          message: `${action.payload.username} was successfully created.`,
+          message: `${action.payload.username} was created successfully.`,
           status: alertStatusEnums.SUCCESS
         }
       };
 
-    case ADMIN_USER_SUBMIT_ERROR:
+    case ADMIN_USER_CREATE_SUBMIT_ERROR:
       return {
         ...state,
         alert: {
           isOpen: true,
           message: "An error occurred.",
+          status: alertStatusEnums.ERROR
+        }
+      };
+
+    // -----> edit
+    case ADMIN_USER_EDIT_SUBMIT_SUCCESS:
+      return {
+        ...state,
+        alert: {
+          isOpen: true,
+          message: `${action.payload.username} was edited successfully.`,
+          status: alertStatusEnums.SUCCESS
+        }
+      };
+      
+    case ADMIN_USER_EDIT_SUBMIT_ERROR:
+      return {
+        ...state,
+        alert: {
+          isOpen: true,
+          message: "An error occured.",
           status: alertStatusEnums.ERROR
         }
       };

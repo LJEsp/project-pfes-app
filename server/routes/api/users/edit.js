@@ -23,7 +23,7 @@ module.exports = ({ router, passport, roleEnums, User, validateEditUser }) => {
       userEdits.role = req.body.role;
       userEdits.firstName = req.body.firstName;
       userEdits.lastName = req.body.lastName;
-      if (req.body.middleName) userEdits.middleName = req.body.middleName;
+      userEdits.middleName = req.body.middleName;
       userEdits.email = req.body.email;
       userEdits.contact = req.body.contact;
       userEdits.isActive = req.body.isActive;

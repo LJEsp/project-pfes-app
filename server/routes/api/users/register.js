@@ -50,11 +50,7 @@ module.exports = ({
               newUser.password = hash;
               newUser
                 .save()
-                .then(user =>
-                  res
-                    .status(200)
-                    .json({ success: "User successfully created." })
-                )
+                .then(user => res.status(200).json({ username: user.username }))
                 .catch(err => console.log(err));
             });
           });

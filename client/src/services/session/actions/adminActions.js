@@ -3,12 +3,17 @@ import axios from "axios";
 import {
   ADMIN_USERS_GET_ALL,
   ADMIN_USERS_FETCH_ALL,
-  ADMIN_USER_SUBMIT,
-  ADMIN_USER_SUBMIT_ERROR,
-  ADMIN_USER_SUBMIT_SUCCESS,
+  ADMIN_USER_CREATE_OPEN,
+  ADMIN_USER_CREATE_SUBMIT,
+  ADMIN_USER_CREATE_SUBMIT_ERROR,
+  ADMIN_USER_CREATE_SUBMIT_SUCCESS,
+  ADMIN_USER_CREATE_CLOSE,
   ADMIN_USER_ERRORS_CLEAR,
   ADMIN_USER_SELECT,
   ADMIN_USER_SELECT_SUCCESS,
+  ADMIN_USER_EDIT_SUBMIT,
+  ADMIN_USER_EDIT_SUBMIT_SUCCESS,
+  ADMIN_USER_EDIT_SUBMIT_ERROR,
   ADMIN_USER_EDIT_CLOSE
 } from "./types";
 
@@ -25,11 +30,18 @@ export const getAllUsers = () => dispatch => {
   });
 };
 
+// ************ Create User ************
+export const openCreateUserDialog = () => dispatch => {
+  dispatch({
+    type: ADMIN_USER_CREATE_OPEN
+  });
+};
+
 // >>> This will return a promise to the component :)
 export const createUser = userData => dispatch => {
   return new Promise((resolve, reject) => {
     dispatch({
-      type: ADMIN_USER_SUBMIT
+      type: ADMIN_USER_CREATE_SUBMIT
     });
 
     axios
@@ -38,7 +50,7 @@ export const createUser = userData => dispatch => {
         dispatch(getAllUsers());
 
         dispatch({
-          type: ADMIN_USER_SUBMIT_SUCCESS,
+          type: ADMIN_USER_CREATE_SUBMIT_SUCCESS,
           payload: res.data
         });
 
@@ -46,12 +58,18 @@ export const createUser = userData => dispatch => {
       })
       .catch(err => {
         dispatch({
-          type: ADMIN_USER_SUBMIT_ERROR,
+          type: ADMIN_USER_CREATE_SUBMIT_ERROR,
           payload: err.response.data
         });
 
         reject(err.response.data);
       });
+  });
+};
+
+export const closeCreateUserDialog = () => dispatch => {
+  dispatch({
+    type: ADMIN_USER_CREATE_CLOSE
   });
 };
 
@@ -62,7 +80,7 @@ export const clearUserErrors = () => dispatch => {
   });
 };
 
-// >>> Edit User
+// ************ Edit User ************
 export const selectUser = userId => dispatch => {
   dispatch({
     type: ADMIN_USER_SELECT
@@ -75,6 +93,30 @@ export const selectUser = userId => dispatch => {
     });
   });
 };
+
+export const submitUserEdits = userEdits => dispatch => {
+  dispatch({
+    type: ADMIN_USER_EDIT_SUBMIT
+  });
+
+  axios
+    .put(`/api/users/${userEdits._id}`, userEdits)
+    .then(res => {
+      dispatch({
+        type: ADMIN_USER_EDIT_SUBMIT_SUCCESS,
+        payload: res.data
+      });
+
+      dispatch(getAllUsers());
+    })
+    .catch(err => {
+      dispatch({
+        type: ADMIN_USER_EDIT_SUBMIT_ERROR,
+        payload: err.response.data
+      });
+    });
+};
+
 export const closeEditUserDialog = () => dispatch => {
   dispatch({
     type: ADMIN_USER_EDIT_CLOSE
