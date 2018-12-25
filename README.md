@@ -2,7 +2,7 @@
 This is a rebuild of my previous PFES App project using Material UI.
 
 ## Note
-I've decided to put this project on hold as most of the work is trying to find workarounds to making Material UI and Redux compatible without using stuff like React-Form and it's frustrating and a waste of time (check recent commits)!
+I've decided to terminate this project as it has become frustrating to make React, Material-ui forms, and Redux work together seamlessly without using stuff like React-Form. There are workarounds but I don't believe they promote good practices! :D
 
 ## Author
 Leandro Esparrago
